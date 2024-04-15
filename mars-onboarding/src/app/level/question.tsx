@@ -7,9 +7,23 @@ import 'prismjs/components/prism-python';
 import 'prismjs/themes/prism.css';
 export default function Question({children, starterCode, language, validate} : {children : React.ReactNode, starterCode : string, language : string, validate: (code : string) => boolean}) {
   const [code, setCode] = React.useState(
-    `function add(a, b) {\n  return a + b;\n}`
+    starterCode
   );
+  function onSubmit() {
+    let submittedCode = code;
+    if (validate(submittedCode)) {
+      console.log("Good");
+    }
+    else {
+      console.log("Bad");
+    }
+  }
     return (<div>
+      <code>
+        print("hello world")<br></br>
+        print("Hello <input></input>")<br/>
+        print("dog")<br/>
+      </code>
         <Editor
         value={code}
         onValueChange={code => setCode(code)}
