@@ -1,8 +1,10 @@
 import Link from "next/link";
+import ParticlesBackground from "../../../components/ParticlesBackground";
 
 export default function LevelSelectPage() {
     return (
     <div>
+        <ParticlesBackground></ParticlesBackground>
         <div className = "flex items-start content-start bg-black sticky top w-full h-30">
             <Link href = "/" className = "text-white m-5 text-5xl hover:text-red-700">⬅</Link>
         </div>

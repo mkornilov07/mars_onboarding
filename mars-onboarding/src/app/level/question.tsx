@@ -10,9 +10,9 @@ export default function Question({children, starterCode, language, correctAnswer
     let i = 0;
     let counter = 0;
     let output = "";
-        while (i < s.length - 5) {
+    while (i < s.length - 5) {
       if (s.substring(i, i+5) == "BLANK") {
-        output += `<input id = 'blank${counter}'></input>`;
+        output += `<input id = 'blank${counter}' class = "text-black bg-gray-600 focus:bg-gray-300 focus:border-red-600"></input>`;
         counter += 1;
         i += 5;
       }
@@ -41,8 +41,12 @@ export default function Question({children, starterCode, language, correctAnswer
     }
   }
     return (
-      (<div><code dangerouslySetInnerHTML={{__html: replaceBlanks(starterCode)}}></code>
-      <br/>
-      <button className ="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick = {onSubmit}>Submit</button></div>)
+      (<div>
+        <code dangerouslySetInnerHTML={{__html: replaceBlanks(starterCode)}}></code>
+        <br/>
+        <button className ="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick = {onSubmit}>
+          Submit
+        </button>
+      </div>)
     )
 }
