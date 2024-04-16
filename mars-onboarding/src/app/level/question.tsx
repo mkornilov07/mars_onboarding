@@ -6,32 +6,43 @@ import 'prismjs/components/prism-python';
 import 'prismjs/themes/prism.css';
 import { Container } from 'postcss';
 export default function Question({children, starterCode, language, correctAnswers} : {children : React.ReactNode, starterCode : string, language : string, correctAnswers: string[]}) {
-  function handleBlanks(s : string) {
-    var i = 0;
-    var counter = 0;
-    var output = document.createElement('code');
-        while (i < s.length-5) {
+  function replaceBlanks(s : string) {
+    let i = 0;
+    let counter = 0;
+    let output = "";
+        while (i < s.length - 5) {
       if (s.substring(i, i+5) == "BLANK") {
-        output.innerHTML += `<input id = 'blank${counter}'></input>`
+        output += `<input id = 'blank${counter}'></input>`;
+        counter += 1;
         i += 5;
       }
       else {
-        output.innerHTML += s[i];
+        output += s[i];
         i += 1;
       }
     }
+    output += s.substring(i, s.length);
     return output;
   }
   function onSubmit() {
-    if (true) {
-      console.log("Good");
-    }
-    else {
-      console.log("Bad");
+    for (let i = 0; i < correctAnswers.length; i++) {
+      let box = document.getElementById(`blank${i}`);
+      let response = box?.value;
+      // console.log(`You answered ${response}`);
+      // console.log(`Correct answer is ${correctAnswers[i]}`)
+      if (response == correctAnswers[i]) {
+        console.log("Good");
+        box?.animate([{"color": "lightgreen"}, {"color": "black"}], 2000);
+      }
+      else {
+        console.log("Bad");
+        box?.animate([{"color": "red"}, {"color": "black"}], 2000);
+      }
     }
   }
     return (
-      <Container child = {handleBlanks(starterCode)}/>
-        
+      (<div><code dangerouslySetInnerHTML={{__html: replaceBlanks(starterCode)}}></code>
+      <br/>
+      <button className ="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick = {onSubmit}>Submit</button></div>)
     )
 }
