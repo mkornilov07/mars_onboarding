@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
+import ParticlesBackground from "../../components/ParticlesBackground";
 
 const roboto = Roboto({ subsets: ["latin"], weight: ["300"] });
 
@@ -20,6 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={roboto.className}>{children}</body>
+      <ParticlesBackground></ParticlesBackground>
     </html>
   );
 }

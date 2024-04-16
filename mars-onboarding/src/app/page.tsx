@@ -1,3 +1,4 @@
+"use client"
 import 'animate.css';
 import Link from 'next/link';
 
