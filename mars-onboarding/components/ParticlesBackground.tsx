@@ -37,8 +37,8 @@ export default function ParticlesBackground() {
         color: {
           value: "#000000",
         },
+        opacity: 0,
       },
-      opacity: 0,
       fpsLimit: 120,
       interactivity: {
         events: {
