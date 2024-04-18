@@ -11,6 +11,6 @@ export default function ROSLevel({children} : {children: React.ReactNode}) {
     let starterCode = "";
     let correctAnswers= [""];
     return (
-        <Level language = "python" lesson = {lesson} title = {title} starterCode = {starterCode} correctAnswers={correctAnswers}/>
+        <Level language = "python" lesson = {lesson} title = {title} starterCode = {starterCode} correctAnswers={correctAnswers} levelName='ROS Level'/>
     );
 };
