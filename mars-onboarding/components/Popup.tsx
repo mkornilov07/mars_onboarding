@@ -1,14 +1,15 @@
 "use client";
-import React, { ReactNode } from "react";
+import React, { ReactNode, useEffect } from "react";
 import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, ModalProps} from "@nextui-org/react";
 
 export default function Popup({contents, title} : {contents: ReactNode, title: ReactNode}) {
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
     const [scrollBehavior, setScrollBehavior] = React.useState<ModalProps["scrollBehavior"]>("inside");
+    useEffect(onOpen, [contents]);
 
     return (
     <>
-        <Button onPress={onOpen} color="primary">Open Modal</Button>
+        <Button onPress={onOpen} color="primary"><img src = "/icons/book.png" width="25px"></img></Button>
         <Modal 
             backdrop="opaque" 
             isOpen={isOpen} 
