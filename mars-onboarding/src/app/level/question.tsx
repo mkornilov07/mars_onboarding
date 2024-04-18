@@ -1,20 +1,27 @@
-import { ReactDOM, createElement } from 'react';
+import { ReactDOM, createElement, useEffect } from 'react';
 import React, { JSXElementConstructor } from 'react';
 import 'prismjs/components/prism-core';
 import 'prismjs/components/prism-clike';
 import 'prismjs/components/prism-python';
 import 'prismjs/themes/prism.css';
 import { Container } from 'postcss';
+import Prism from 'prismjs';
 export default function Question({children, starterCode, language, correctAnswers} : {children : React.ReactNode, starterCode : string, language : string, correctAnswers: string[]}) {
-  function replaceBlanks(s : string) {
+  function replaceBlanks(s : string, language : string) {
+    const BLANK = "BLANK";
+    const LEN_BLANK=BLANK.length;
     let i = 0;
     let counter = 0;
-    let output = "";
-    while (i < s.length - 5) {
-      if (s.substring(i, i+5) == "BLANK") {
-        output += `<input id = 'blank${counter}' class = "text-black bg-gray-600 focus:bg-gray-300 focus:border-red-600"></input>`;
+    let openingTag = `<code class = "language-${language} add-some-styling-later-idk-what-tailwind-looks-like">`;
+    let closingTag = `</code>`;
+    let output = openingTag;
+    while (i < s.length - LEN_BLANK) {
+      if (s.substring(i, i+LEN_BLANK) == BLANK) {
+        output += closingTag + 
+        `<code><input id = 'blank${counter}' class = "text-black bg-gray-600 focus:bg-gray-300 focus:border-red-600"></input></code>` 
+        + openingTag;
         counter += 1;
-        i += 5;
+        i += LEN_BLANK;
       }
       else {
         output += s[i];
@@ -22,6 +29,7 @@ export default function Question({children, starterCode, language, correctAnswer
       }
     }
     output += s.substring(i, s.length);
+    output += closingTag;
     return output;
   }
   function onSubmit() {
@@ -42,7 +50,7 @@ export default function Question({children, starterCode, language, correctAnswer
   }
     return (
       (<div>
-        <code dangerouslySetInnerHTML={{__html: replaceBlanks(starterCode)}}></code>
+        <div dangerouslySetInnerHTML={{__html: replaceBlanks(starterCode, language)}}></div>
         <br/>
         <button className ="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick = {onSubmit}>
           Submit

@@ -11,7 +11,7 @@ export default function ROSLevel({children,} : { children: React.ReactNode}) {
             <h1>ROS Level</h1>
         </div>
         <div className = "flex-col min-h-screen w-full bg-black text-white">
-            <Question language="python" starterCode="Catto's rapper name is BLANK and his favorite food is BLANK bread" correctAnswers={["LBC", "garlic"]}><div></div></Question>
+            <Question language="python" starterCode="print('hello world') Catto's rapper name is BLANK and his favorite food is BLANK bread" correctAnswers={["LBC", "garlic"]}><div></div></Question>
         </div>
     compoennt
     </div>);
