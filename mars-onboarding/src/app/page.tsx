@@ -12,13 +12,13 @@ export default function Home() {
           <Link href= "/level">
             MARS
             <br />
-            O n b o a r d i n g
+            T r a i n i n g
           </Link>
         </p>
         <h1 className="z-15 text-white m-10 font-mono relative w-[max-content] 
 before:absolute before:inset-0 before:animate-typewriter before:bg-black
 after:absolute after:inset-0 after:w-[0.125em] after:animate-caret after:bg-white">
-          hewwo daddy where are my 4 garlic bweads and 8 milks
+          Begin your journey at UVA's most innovative organization
         </h1>
       </div>
     </main>
