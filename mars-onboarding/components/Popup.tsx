@@ -1,5 +1,6 @@
 "use client";
 import React, { ReactNode, useEffect } from "react";
+import 'animate.css';
 import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, ModalProps} from "@nextui-org/react";
 
 export default function Popup({contents, title} : {contents: ReactNode, title: ReactNode}) {
@@ -34,12 +35,13 @@ export default function Popup({contents, title} : {contents: ReactNode, title: R
         <ModalContent>
             {(onClose) => (
             <>
+            <div className = "animate__animated animate__lightSpeedInRight scale-75 transform right-1 fixed"><img src = "/icons/rover.png"></img></div>
                 <ModalHeader className="flex flex-col gap-1">{title}</ModalHeader>
                 <ModalBody>{contents}
                 </ModalBody>
                 <ModalFooter>
                 <Button color="primary" variant="light" onPress={onClose}>
-                    Close
+                    Start Coding
                 </Button>
                 </ModalFooter>
             </>
