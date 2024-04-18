@@ -4,13 +4,17 @@ import Popup from "../../../../components/Popup";
 export default function LinuxLevel() {
     return (
         <div>
-            <div className = "flex text-white items-start content-start bg-black sticky top w-full h-30">
-                <Link href = "/level/" className = "text-white m-5 text-5xl hover:text-red-700">⬅</Link>
-                <h1>Linux Level</h1>
-                <Popup></Popup>
+            <div className = "flex text-white bg-black sticky justify-between top w-full h-30">
+                <Link href = "/level/" className = "text-white m-10 self-center content-start text-5xl hover:text-red-700">⬅</Link>
+                <h1 className = "m-10 select-none font-bold text-4xl place-self-center">Linux Level</h1>
+                <div className = "m-10 select-none cursor-help place-content-center">
+                    <Popup></Popup>
+                </div>
             </div>
-            <div className = "flex-col min-h-screen w-full bg-black text-white">
-                stuff
+            <div className = "z-0 flex-col min-h-screen w-full bg-zinc-900 text-white place-items-center">
+                <p className = "text-zinc-900 bg-zinc-900">empty placeholder</p>
+                <p className = "text-zinc-900 bg-zinc-900">empty placeholder</p>
+                <p className = "flex place-content-center">stuff</p>
             </div>
         </div>
 )};
