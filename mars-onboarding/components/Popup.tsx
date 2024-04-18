@@ -8,26 +8,26 @@ export default function Popup({contents, title} : {contents: ReactNode, title: R
 
     return (
     <>
-        <Button onPress={onOpen} color="secondary">Open Modal</Button>
+        <Button onPress={onOpen} color="primary">Open Modal</Button>
         <Modal 
-            backdrop="blur" 
+            backdrop="opaque" 
             isOpen={isOpen} 
             onOpenChange={onOpenChange}
             scrollBehavior={scrollBehavior}
             size="xl"
             radius="lg"
             classNames={{
-                //body: "py-6 rounded",
-                body: "py-6",
-                backdrop: "bg-[#292f46]/50 backdrop-opacity-40",
-                base: "border-[#292f46] bg-[#19172c] dark:bg-[#19172c] text-[#a8b0d3]",
-                header: "border-b-[1px] border-[#292f46]",
-                footer: "border-t-[1px] border-[#292f46]",
-                closeButton: "hover:bg-white/5 active:bg-white/10",
-                // base: "border-red-900 shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#08f,0_0_15px_#08f,0_0_30px_#08f] shadow-red-600 bg-zinc-900 dark:bg-zinc-900 text-white",
-                // header: "border-b-[1px] border-red-800",
-                // footer: "border-t-[1px] border-red-800",
-                // closeButton: "hover:bg-red-700 active:bg-red-800",
+                body: "py-6 rounded",
+                // body: "py-6",
+                // backdrop: "bg-[#292f46]/50 backdrop-opacity-40",
+                // base: "border-[#292f46] bg-[#19172c] dark:bg-[#19172c] text-[#a8b0d3]",
+                // header: "border-b-[1px] border-[#292f46]",
+                // footer: "border-t-[1px] border-[#292f46]",
+                // closeButton: "hover:bg-white/5 active:bg-white/10",
+                base: "border-red-900 shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#08f,0_0_15px_#08f,0_0_30px_#08f] shadow-red-600 bg-zinc-900 dark:bg-zinc-900 text-white",
+                header: "border-b-[1px] border-red-800 text-red-500",
+                footer: "border-t-[1px] border-red-800",
+                closeButton: "hover:bg-red-700 active:bg-red-800",
             }}
         >
         <ModalContent>
