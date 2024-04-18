@@ -10,7 +10,7 @@ export default function Popup({contents, title} : {contents: ReactNode, title: R
 
     return (
     <>
-        <Button onPress={onOpen} color="primary"><img src = "/icons/book.png" width="25px"></img></Button>
+        <Button onPress={onOpen} className="cursor-help" color="primary"><img src = "/icons/book.png" className = "cursor-help" width="25px"></img></Button>
         <Modal 
             backdrop="opaque" 
             isOpen={isOpen} 
