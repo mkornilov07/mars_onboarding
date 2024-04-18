@@ -16,7 +16,7 @@ export default function ROSLevel({children} : {children: React.ReactNode}) {
                 <Popup contents = {lesson} title = {title}></Popup>
             </div>
         </div>
-        <div className = "z-0 flex-col min-h-screen w-full bg-zinc-900 text-white place-items-center">
+        <div className = "z-0 flex-col min-h-screen w-full bg-zinc-900 text-white place-items-center overflow-hidden">
             <p className = "text-zinc-900 bg-zinc-900">empty placeholder</p>
             <p className = "text-zinc-900 bg-zinc-900">empty placeholder</p>
             <Question language="python" starterCode="print('hello world') Catto's rapper name is BLANK and his favorite food is BLANK bread" correctAnswers={["LBC", "garlic"]}><div></div></Question>

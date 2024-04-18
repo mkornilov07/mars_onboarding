@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 export default function RootLayout({children}: { children: React.ReactNode }){
   return (
     <html lang="en" className = "dark text-foreground bg-background">
-      <body className={roboto.className + " overflow-clip"}>
+      <body className={roboto.className + " select-none"}>
         <Providers>
           { children }
         </Providers>

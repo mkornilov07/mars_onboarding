@@ -18,7 +18,7 @@ export default function Question({children, starterCode, language, correctAnswer
     while (i < s.length - LEN_BLANK) {
       if (s.substring(i, i+LEN_BLANK) == BLANK) {
         output += closingTag + 
-        `<code><input id = 'blank${counter}' class = "text-black bg-gray-600 focus:bg-gray-300 focus:border-red-600"></input></code>` 
+        `<code><input autocomplete='false' id = 'blank${counter}' class = "text-black bg-gray-600 focus:bg-gray-300 focus:border-red-600"></input></code>` 
         + openingTag;
         counter += 1;
         i += LEN_BLANK;
