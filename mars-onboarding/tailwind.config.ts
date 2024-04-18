@@ -67,7 +67,21 @@ const config: Config = {
       },
     }
   },
-  plugins: [require('tailwindcss-animatecss'), nextui(),],
+  plugins: [require('tailwindcss-animatecss'), nextui({addCommonColors: true, themes: {
+    dark: {
+      colors: {
+        background: "#000000", // or DEFAULT
+        foreground: "#FFFFFF", // or 50 to 900 DEFAULT
+        primary: {
+          //... 50 to 900
+          foreground: "#FFFFFF",
+          DEFAULT: "#950101",
+        },
+        focus: "#3D0000"
+      },
+    },
+  },
+}),],
   darkMode: "class",
   
 };
