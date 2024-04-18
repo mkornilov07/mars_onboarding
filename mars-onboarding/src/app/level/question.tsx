@@ -8,18 +8,20 @@ import { Container } from 'postcss';
 import Prism from 'prismjs';
 export default function Question({children, starterCode, language, correctAnswers} : {children : React.ReactNode, starterCode : string, language : string, correctAnswers: string[]}) {
   function replaceBlanks(s : string, language : string) {
+    const BLANK = "BLANK";
+    const LEN_BLANK=BLANK.length;
     let i = 0;
     let counter = 0;
     let openingTag = `<code class = "language-${language} dog">`;
     let closingTag = `</code>`;
     let output = openingTag;
-    while (i < s.length - 5) {
-      if (s.substring(i, i+5) == "BLANK") {
+    while (i < s.length - LEN_BLANK) {
+      if (s.substring(i, i+LEN_BLANK) == BLANK) {
         output += closingTag + 
         `<code><input id = 'blank${counter}' class = "text-black bg-gray-600 focus:bg-gray-300 focus:border-red-600"></input></code>` 
         + openingTag;
         counter += 1;
-        i += 5;
+        i += LEN_BLANK;
       }
       else {
         output += s[i];
