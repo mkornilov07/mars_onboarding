@@ -12,7 +12,7 @@ export default function Question({children, starterCode, language, correctAnswer
     const LEN_BLANK=BLANK.length;
     let i = 0;
     let counter = 0;
-    let openingTag = `<code class = "language-${language} dog">`;
+    let openingTag = `<code class = "language-${language} add-some-styling-later-idk-what-tailwind-looks-like">`;
     let closingTag = `</code>`;
     let output = openingTag;
     while (i < s.length - LEN_BLANK) {
