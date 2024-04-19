@@ -4,11 +4,13 @@ import React, { JSXElementConstructor } from 'react';
 import 'prismjs/components/prism-core';
 import 'prismjs/components/prism-clike';
 import 'prismjs/components/prism-python';
+import 'prismjs/components/prism-bash';
 import 'prismjs/themes/prism.css';
 import Prism from 'prismjs';
 import { FireworksInstance, fireworks } from '@tsparticles/fireworks';
 import Particles from '@tsparticles/react';
 export default function Question({children, starterCode, language, correctAnswers} : {children : React.ReactNode, starterCode : string, language : string, correctAnswers: string[]}) {
+  useEffect(()=>Prism.highlightAll(), []);
   const [questionComplete, setQuestionComplete] = useState(false);
   function replaceBlanks(s : string, language : string) {
     s = s.replaceAll('\n', '<br>');
@@ -21,6 +23,11 @@ export default function Question({children, starterCode, language, correctAnswer
     let closingTag = `</code>`;
     let output = openingTag;
     while (i < s.length - LEN_BLANK+1) {
+      if (s.substring(i, i+4) == '<br>') {
+        output +=closingTag + closingTag + '<br>' + openingTag;
+        i += 4;
+        continue;
+      }
       // console.log(`Output is ${output}`);
       if (s.substring(i, i+LEN_BLANK) == BLANK) {
         output += closingTag + 
@@ -34,8 +41,10 @@ export default function Question({children, starterCode, language, correctAnswer
         i += 1;
       }
     }
-    output += s.substring(i+1, s.length);
+    output += s.substring(i, s.length);
     output += closingTag;
+    output = output.replace(openingTag + closingTag, "");
+    output = output.replace(openingTag + " " + closingTag, "");
     return output;
   }
   function onSubmit() {

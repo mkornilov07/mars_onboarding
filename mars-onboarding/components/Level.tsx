@@ -20,7 +20,7 @@ lesson : ReactNode, title : ReactNode, language : string, starterCode : string, 
                 </div>
             </div>
             <div className = "z-0 flex-col select-none min-h-screen w-full bg-zinc-900 text-white">
-                <div className = "flex container mx-auto flex-col max-w-lg align-items-center space-evenly">
+                <div className = "flex container mx-auto flex-col max-w-[900px] align-items-center space-evenly">
                     <p className = "flex text-zinc-900 bg-zinc-900">empty placeholder</p>
                     <p className = "flex text-zinc-900 bg-zinc-900">empty placeholder</p>
                     <Question language={language} starterCode={starterCode} correctAnswers={correctAnswers}><div></div></Question>
