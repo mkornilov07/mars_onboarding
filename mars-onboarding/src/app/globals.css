@@ -24,7 +24,6 @@ body {
   overflow: hidden;
 } 
 
-
 @layer utilities {
   .text-balance {
     text-wrap: balance;
