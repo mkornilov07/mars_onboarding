@@ -4,7 +4,6 @@ import 'prismjs/components/prism-core';
 import 'prismjs/components/prism-clike';
 import 'prismjs/components/prism-python';
 import 'prismjs/themes/prism.css';
-import { Container } from 'postcss';
 import Prism from 'prismjs';
 export default function Question({children, starterCode, language, correctAnswers} : {children : React.ReactNode, starterCode : string, language : string, correctAnswers: string[]}) {
   function replaceBlanks(s : string, language : string) {
