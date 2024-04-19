@@ -6,6 +6,7 @@ import 'prismjs/components/prism-clike';
 import 'prismjs/components/prism-python';
 import 'prismjs/themes/prism.css';
 import Prism from 'prismjs';
+
 export default function Question({children, starterCode, language, correctAnswers} : {children : React.ReactNode, starterCode : string, language : string, correctAnswers: string[]}) {
   function replaceBlanks(s : string, language : string) {
     const BLANK = "BLANK";
@@ -18,7 +19,7 @@ export default function Question({children, starterCode, language, correctAnswer
     while (i < s.length - LEN_BLANK) {
       if (s.substring(i, i+LEN_BLANK) == BLANK) {
         output += closingTag + 
-        `<code><input autocomplete='false' id = 'blank${counter}' class = "text-black bg-gray-600 focus:bg-gray-300 focus:border-red-600"></input></code>` 
+        `<code><input autocomplete='false' id = 'blank${counter}' class = "bg-red-800 opacity-80 cursor-pointer border-red-600 cursor-text hover:shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#08f,0_0_15px_#08f] focus:shadow-red-600 focus:bg-red-800 hover:opacity-90 text-white font-bold py-2 px-4 rounded"></input></code>` 
         + openingTag;
         counter += 1;
         i += LEN_BLANK;
@@ -52,7 +53,7 @@ export default function Question({children, starterCode, language, correctAnswer
       (<div>
         <div dangerouslySetInnerHTML={{__html: replaceBlanks(starterCode, language)}}></div>
         <br/>
-        <button className ="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick = {onSubmit}>
+        <button className ="bg-red-800 opacity-80 cursor-pointer border-red-600 hover:shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#08f,0_0_15px_#08f,0_0_30px_#08f] hover:shadow-red-600 hover:bg-red-800 hover:opacity-80 text-white font-bold py-2 px-4 rounded" onClick = {onSubmit}>
           Submit
         </button>
       </div>)
