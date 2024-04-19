@@ -1,0 +1,12 @@
+code {
+    background-color: rgb(69, 69, 69);
+    padding-left:4px;
+    padding-right:3px;
+    margin-left: 2px;
+    margin-right: 2px;
+    border-radius:3px;
+}
+
+b {
+    color: rgb(228, 118, 28);
+}

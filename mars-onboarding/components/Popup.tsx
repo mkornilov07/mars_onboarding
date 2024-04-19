@@ -1,6 +1,7 @@
 'use client'
 import React, { ReactNode, useEffect } from "react";
 import 'animate.css';
+import '/public/stylesheets/popup.css';
 import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, ModalProps} from "@nextui-org/react";
 
 export default function Popup({contents, title} : {contents: ReactNode, title: ReactNode}) {
