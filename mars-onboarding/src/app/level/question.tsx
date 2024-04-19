@@ -17,14 +17,14 @@ export default function Question({children, starterCode, language, correctAnswer
     const LEN_BLANK=BLANK.length;
     let i = 0;
     let counter = 0;
-    let openingTag = `<code class = "language-${language} add-some-styling-later-idk-what-tailwind-looks-like">`;
+    let openingTag = `<code class = "language-${language} font-mono">`;
     let closingTag = `</code>`;
     let output = openingTag;
     while (i < s.length - LEN_BLANK+1) {
       // console.log(`Output is ${output}`);
       if (s.substring(i, i+LEN_BLANK) == BLANK) {
         output += closingTag + 
-        `<input autocomplete='off' id = 'blank${counter}' class = "font-mono text-black bg-gray-600 focus:bg-gray-300 focus:border-red-600"></input>`;
+        `<input autocomplete='off' id = 'blank${counter}' placeholder = "enter code here" class = "font-mono shadow-inner shadow-black shadow-md hover:shadow-lg p-2 hover:bg-zinc-800 hover:bg-opacity-80 focus:bg-zinc-800 focus:bg-opacity-80 caret-red-500 tracking-wide outline-none cursor-text text-red-500 font-normal rounded"></input>`;
         if (i != s.length - LEN_BLANK) output += openingTag;
         counter += 1;
         i += LEN_BLANK;
@@ -63,7 +63,8 @@ export default function Question({children, starterCode, language, correctAnswer
   }
     return (
       (<div>
-        <div dangerouslySetInnerHTML={{__html: replaceBlanks(starterCode, language)}}></div>
+        <div dangerouslySetInnerHTML={{__html: replaceBlanks(starterCode, language)}}
+         className = "bg-zinc-800 rounded p-5"></div>
         <br/>
         <Particles></Particles>
         <button className ="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick = {onSubmit}>

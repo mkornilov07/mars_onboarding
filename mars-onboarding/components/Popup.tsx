@@ -11,7 +11,7 @@ export default function Popup({contents, title} : {contents: ReactNode, title: R
 
     return (
     <>
-        <Button onPress={onOpen} className="cursor-help" color="primary"><img src = "/icons/book.png" className = "cursor-help" width="25px"></img></Button>
+        <Button onPress={onOpen} className="cursor-help" color="primary"><img src = "/icons/book.png" width="25px"></img></Button>
         <Modal 
             backdrop="opaque" 
             isOpen={isOpen} 
@@ -30,7 +30,7 @@ export default function Popup({contents, title} : {contents: ReactNode, title: R
                 base: "border-red-900 shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#08f,0_0_15px_#08f,0_0_30px_#08f] shadow-red-600 bg-zinc-900 dark:bg-zinc-900 text-white",
                 header: "border-b-[1px] border-red-800 text-red-500",
                 footer: "border-t-[1px] border-red-800",
-                closeButton: "hover:bg-red-700 active:bg-red-800",
+                closeButton: "hover:bg-red-700 active:bg-red-800 z-50",
             }}
         >
         <ModalContent>
