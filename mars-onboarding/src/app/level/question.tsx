@@ -19,7 +19,7 @@ export default function Question({children, starterCode, language, correctAnswer
     while (i < s.length - LEN_BLANK) {
       if (s.substring(i, i+LEN_BLANK) == BLANK) {
         output += closingTag + 
-        `<code><input autocomplete='false' id = 'blank${counter}' placeholder = "enter code here" class = "p-2 hover:bg-zinc-800 hover:bg-opacity-80 focus:bg-zinc-800 focus:bg-opacity-80 shadow-inner shadow-black shadow-lg caret-red-500 tracking-wide outline-none cursor-text text-red-500 font-normal rounded"></input></code>` 
+        `<code><input autocomplete='false' id = 'blank${counter}' placeholder = "enter code here" class = "shadow-inner shadow-black shadow-md hover:shadow-lg p-2 hover:bg-zinc-800 hover:bg-opacity-80 focus:bg-zinc-800 focus:bg-opacity-80 caret-red-500 tracking-wide outline-none cursor-text text-red-500 font-normal rounded"></input></code>` 
         + openingTag;
         counter += 1;
         i += LEN_BLANK;
