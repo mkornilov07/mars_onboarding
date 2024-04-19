@@ -13,13 +13,13 @@ export default function Question({children, starterCode, language, correctAnswer
     const LEN_BLANK=BLANK.length;
     let i = 0;
     let counter = 0;
-    let openingTag = `<span class = "language-${language} font-mono">`;
-    let closingTag = `</span>`;
+    let openingTag = `<code class = "language-${language} font-mono">`;
+    let closingTag = `</code>`;
     let output = openingTag;
     while (i < s.length - LEN_BLANK) {
       if (s.substring(i, i+LEN_BLANK) == BLANK) {
         output += closingTag + 
-        `<span><input autocomplete='false' id = 'blank${counter}' placeholder = "enter code here" class = "shadow-[inset_0_2px_6px_rgba(0,0,0,0.6)] shadow-black shadow-lg p-2 hover:bg-zinc-800 hover:bg-opacity-80 focus:bg-zinc-800 focus:bg-opacity-80 caret-red-500 tracking-wide outline-none cursor-text text-red-500 font-normal rounded"></input></span>` 
+        `<code><input autocomplete='false' id = 'blank${counter}' placeholder = "enter code here" class = "shadow-[inset_0_2px_6px_rgba(0,0,0,0.6)] shadow-black shadow-lg p-2 hover:bg-zinc-800 hover:bg-opacity-80 focus:bg-zinc-800 focus:bg-opacity-80 caret-red-500 tracking-wide outline-none cursor-text text-red-500 font-normal rounded"></input></code>` 
         + openingTag;
         counter += 1;
         i += LEN_BLANK;
