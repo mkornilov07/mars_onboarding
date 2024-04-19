@@ -13,13 +13,13 @@ export default function Question({children, starterCode, language, correctAnswer
     const LEN_BLANK=BLANK.length;
     let i = 0;
     let counter = 0;
-    let openingTag = `<code class = "language-${language} add-some-styling-later-idk-what-tailwind-looks-like">`;
+    let openingTag = `<code class = "language-${language} font-mono">`;
     let closingTag = `</code>`;
     let output = openingTag;
     while (i < s.length - LEN_BLANK) {
       if (s.substring(i, i+LEN_BLANK) == BLANK) {
         output += closingTag + 
-        `<code><input autocomplete='false' id = 'blank${counter}' class = "bg-red-800 opacity-80 cursor-pointer border-red-600 cursor-text hover:shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#08f,0_0_15px_#08f] focus:shadow-red-600 focus:bg-red-800 hover:opacity-90 text-white font-bold py-2 px-4 rounded"></input></code>` 
+        `<code><input autocomplete='false' id = 'blank${counter}' placeholder = "enter code here" class = "placeholder-shown:border-gray-500 caret-red focus:bg-zinc-700 focus:border-red-600 cursor-text text-white font-medium py-2 px-4 rounded"></input></code>` 
         + openingTag;
         counter += 1;
         i += LEN_BLANK;
@@ -51,9 +51,10 @@ export default function Question({children, starterCode, language, correctAnswer
   }
     return (
       (<div>
-        <div dangerouslySetInnerHTML={{__html: replaceBlanks(starterCode, language)}}></div>
+        <div dangerouslySetInnerHTML={{__html: replaceBlanks(starterCode, language)}}
+         className = "bg-zinc-800 rounded p-5"></div>
         <br/>
-        <button className ="bg-red-800 opacity-80 cursor-pointer border-red-600 hover:shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#08f,0_0_15px_#08f,0_0_30px_#08f] hover:shadow-red-600 hover:bg-red-800 hover:opacity-80 text-white font-bold py-2 px-4 rounded" onClick = {onSubmit}>
+        <button className ="bg-red-800 active:shadow-[0_0_5px_#666] opacity-80 cursor-pointer border-red-600 hover:shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#08f,0_0_15px_#08f,0_0_30px_#08f] hover:shadow-red-600 hover:bg-red-800 hover:opacity-80 text-white font-bold py-2 px-4 rounded" onClick = {onSubmit}>
           Submit
         </button>
       </div>)

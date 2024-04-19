@@ -9,5 +9,5 @@ export default function ROSLevel({children} : {children: React.ReactNode}) {
     let lesson = (<p>A node that publishes messages in a topic is called a <b className='font-extrabold'>publisher</b>.</p>);
     let title = (<>Subscribers and Publishers</>);
     return (
-    <Level lesson = {lesson} title = {title} starterCode='' language='python' correctAnswers={[""]} levelName='ROS Level'></Level>
+    <Level lesson = {lesson} title = {title} starterCode='dsfhuiehfweifohgf3 BLANK gwefhioe BLANK' language='python' correctAnswers={["bruh"]} levelName='ROS Level'></Level>
 )};
