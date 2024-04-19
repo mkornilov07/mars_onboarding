@@ -1,4 +1,4 @@
-"use client";
+'use client'
 import React, { ReactNode, useEffect } from "react";
 import 'animate.css';
 import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, ModalProps} from "@nextui-org/react";

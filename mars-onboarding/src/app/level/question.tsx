@@ -1,3 +1,4 @@
+'use client'
 import { ReactDOM, createElement, useEffect } from 'react';
 import React, { JSXElementConstructor } from 'react';
 import 'prismjs/components/prism-core';
