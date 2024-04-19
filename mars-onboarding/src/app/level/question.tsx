@@ -24,7 +24,7 @@ export default function Question({children, starterCode, language, correctAnswer
       // console.log(`Output is ${output}`);
       if (s.substring(i, i+LEN_BLANK) == BLANK) {
         output += closingTag + 
-        `<input autocomplete='off' id = 'blank${counter}' placeholder = "enter code here" class = "font-mono shadow-inner shadow-black shadow-md hover:shadow-lg p-2 hover:bg-zinc-800 hover:bg-opacity-80 focus:bg-zinc-800 focus:bg-opacity-80 caret-red-500 tracking-wide outline-none cursor-text text-red-500 font-normal rounded"></input>`;
+        `<input autocomplete='off' id = 'blank${counter}' placeholder = "enter code here" class = "shadow-[inset_0_2px_6px_rgba(0,0,0,0.6)] shadow-black shadow-lg p-2 hover:bg-zinc-800 hover:bg-opacity-80 focus:bg-zinc-800 focus:bg-opacity-80 caret-red-500 tracking-wide outline-none cursor-text text-red-500 font-normal rounded"></input>`;
         if (i != s.length - LEN_BLANK) output += openingTag;
         counter += 1;
         i += LEN_BLANK;
