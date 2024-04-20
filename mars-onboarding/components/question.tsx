@@ -88,7 +88,7 @@ export default function Question({children, starterCode, language, correctAnswer
     // console.log(`Replacing BLANK in ${s}`);
     const BLANK = "BLANK";
     const LEN_BLANK=BLANK.length;
-    let openingTag = `<code class = "language-${language}" style = "text-shadow: none">`;
+    let openingTag = `<code class = "language-${language}" style = "text-shadow: none; background-color:transparent">`;
     let closingTag = `</code>`;
     let codeArr = s.split(BLANK);
     let output = "";

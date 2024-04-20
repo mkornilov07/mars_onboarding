@@ -1,13 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* 
+
 :root {
   --foreground-rgb: 255, 255, 255;
   --background-rgb: #212121;
   --background-navbar-rgb: #1e1c1c;
   --background-header-rgb: #ff4545;
-} */
+}
 
 /* @media (prefers-color-scheme: dark) {
   :root {
@@ -17,7 +17,7 @@
   }
 } */
 
-/* body {
+body {
   color: rgb(var(--background-rgb));
   background: rgb(var(--foreground-rgb));
   text-emphasis-color: rgb(var(--background-header-rgb));
@@ -28,4 +28,4 @@
   .text-balance {
     text-wrap: balance;
   }
-} */
+}
