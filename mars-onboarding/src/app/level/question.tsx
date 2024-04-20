@@ -1,16 +1,14 @@
 'use client'
 import { ReactDOM, createElement, useEffect, useState } from 'react';
 import React, { JSXElementConstructor } from 'react';
+import Prism from 'prismjs';
 import 'prismjs/components/prism-core';
 import 'prismjs/components/prism-clike';
 import 'prismjs/components/prism-python';
 import 'prismjs/components/prism-bash';
 import 'prismjs/themes/prism.css';
-import Prism from 'prismjs';
-import { FireworksInstance, fireworks } from '@tsparticles/fireworks';
-import Particles from '@tsparticles/react';
+
 export default function Question({children, starterCode, language, correctAnswers} : {children : React.ReactNode, starterCode : string, language : string, correctAnswers: string[]}) {
-  useEffect(()=>Prism.highlightAll(), []);
   const [questionComplete, setQuestionComplete] = useState(false);
   function replaceBlanks(s : string, language : string) {
     s = s.replaceAll('\n', '<br>');
@@ -19,7 +17,7 @@ export default function Question({children, starterCode, language, correctAnswer
     const LEN_BLANK=BLANK.length;
     let i = 0;
     let counter = 0;
-    let openingTag = `<code class = "language-${language} font-mono">`;
+    let openingTag = `<code class = "language-${language} font-mono" style = "background-color:transparent">`;
     let closingTag = `</code>`;
     let output = openingTag;
     while (i < s.length - LEN_BLANK+1) {
@@ -61,7 +59,7 @@ export default function Question({children, starterCode, language, correctAnswer
       else {
         console.log("Bad");
         allCorrect = false;
-        box?.animate([{"color": "red"}, {"color": "black"}], 2000);
+        box?.animate([{"color": "black"}, {"color": "red"}], 2000);
       }
       
     }
@@ -75,7 +73,6 @@ export default function Question({children, starterCode, language, correctAnswer
         <div dangerouslySetInnerHTML={{__html: replaceBlanks(starterCode, language)}}
          className = "bg-zinc-800 rounded p-5"></div>
         <br/>
-        <Particles></Particles>
         <button className ="bg-red-800 active:shadow-[0_0_5px_#666] opacity-80 cursor-pointer border-red-600 hover:shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#08f,0_0_15px_#08f,0_0_30px_#08f] hover:shadow-red-600 hover:bg-red-800 hover:opacity-80 text-white font-bold py-2 px-4 rounded" onClick = {onSubmit}>
           Submit
         </button>

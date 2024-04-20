@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Popup from "../../../../components/Popup";
 import Level from "../../../../components/Level";
+import 'prismjs/components/prism-python';
 
 export default function LinuxLevel() {
     let title = (<>Redirection</>);
@@ -8,5 +9,5 @@ export default function LinuxLevel() {
         or feed the output of <code>program1</code> into <code>program2</code> by running <code>program1 | program2</code> 
     </p>);
     return (
-        <Level lesson = {lesson} title = {title} starterCode='' language='shell' correctAnswers={[""]} levelName='Linux Level'></Level>
+        <Level lesson = {lesson} title = {title} starterCode='print("hello world")' language='python' correctAnswers={[""]} levelName='Linux Level'></Level>
 )};
