@@ -7,7 +7,7 @@ import 'prismjs/components/prism-clike';
 import 'prismjs/components/prism-python';
 
 import 'prismjs/components/prism-bash';
-import 'prismjs/themes/prism.css';
+import 'prism-themes/themes/prism-xonokai.css';
 const pythonGrammar = {
 	'comment': {
 		pattern: /(^|[^\\])#.*/,
@@ -73,19 +73,10 @@ const pythonGrammar = {
 export default function Question({children, starterCode, language, correctAnswers} : {children : React.ReactNode, starterCode : string, language : string, correctAnswers: string[]}) {
   const [questionComplete, setQuestionComplete] = useState(false);
   useEffect(() => Prism.highlightAll(), []);
-  // useEffect(()=> {
-  //   async function a() {
-  //     await new Promise(r => setTimeout(r, 5000));
-  //     console.log("Highlighting")
-  //     Prism.highlightAll();
-  //   }
-  //   console.log("started");
-  //   a();
-  // }
-  // )
   function replaceBlanks(s : string, language : string) {
     // s = s.replaceAll('\n', '<br>');
     // console.log(`Replacing BLANK in ${s}`);
+    s=s.trim();
     const BLANK = "BLANK";
     const LEN_BLANK=BLANK.length;
     let openingTag = `<code class = "language-${language}" style = "text-shadow: none; background-color:transparent">`;
@@ -96,21 +87,29 @@ export default function Question({children, starterCode, language, correctAnswer
     console.log(`codeArr ${codeArr}`);
     for(let i = 0; i < codeArr.length; i++) {
       output+= openingTag;
-      codeChunks = codeArr[i].split("\n");
+      codeChunks = codeArr[i].trim().split("\n");
       console.log(`Code chunks ${codeChunks}`);
       for (let j =0; j < codeChunks.length; j++) {
         if (codeChunks[j].trim() == "") {continue;}
         
         output += Prism.highlight(codeChunks[j], pythonGrammar, "python");
-        if (j != codeArr[i].length-1 || codeArr[i].endsWith("\n")) {
+        if (j != codeArr[i].length-1) {
           output += "<br>";
       }
       
       }
-      output += closingTag;
-      output += `<input autocomplete='off' id = 'blank${i}' placeholder = "enter code here" class = "font-mono shadow-[inset_0_2px_6px_rgba(0,0,0,0.6)] shadow-black shadow-lg p-2 hover:bg-zinc-800 hover:bg-opacity-80 focus:bg-zinc-800 focus:bg-opacity-80 caret-red-500 tracking-wide outline-none cursor-text text-red-500 font-normal rounded"></input>`;
+      
+      if(i != codeArr.length - 1)  {
+        output += `<input autocomplete='off' id = 'blank${i}' placeholder = "enter code here" class = "border-none font-mono shadow-[inset_0_2px_6px_rgba(0,0,0,0.6)] shadow-black shadow-lg p-2 hover:bg-zinc-800 hover:bg-opacity-80 focus:bg-zinc-800 focus:bg-opacity-80 caret-red-500 tracking-wide outline-none cursor-text text-red-500 font-normal rounded"></input>`;
       output += openingTag;
+      }
+      output += closingTag;
     }
+    output += closingTag;
+    console.log(`Replacing ${openingTag + closingTag}`)
+    output = output.replaceAll(openingTag + closingTag, "");
+    output = output.replaceAll(openingTag + closingTag, "");
+    output = output.replaceAll(openingTag + " " + closingTag, "");
     console.log(`Output ${output}`)
     return output;
   }
