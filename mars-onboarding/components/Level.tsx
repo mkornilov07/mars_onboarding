@@ -1,10 +1,11 @@
 "use client"
 import Link from "next/link";
 import Popup from "./Popup";
-import Question from "@/app/level/question";
 import { ReactNode } from "react";
 import { start } from "repl";
-
+import dynamic from 'next/dynamic'
+import Question from "./question";
+// const NoSSR = dynamic(() => import('../components/question'), { ssr: false })
 export default function Level({
 lesson, title, language, starterCode, correctAnswers, levelName
 } : {
