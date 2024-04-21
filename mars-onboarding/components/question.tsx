@@ -79,7 +79,7 @@ export default function Question({children, starterCode, language, correctAnswer
     s=s.trim();
     const BLANK = "BLANK";
     const LEN_BLANK=BLANK.length;
-    let openingTag = `<code class = "language-${language}" style = "text-shadow: none; background-color:transparent">`;
+    let openingTag = `<code class = "language-${language}" style = "border:none; text-shadow: none; background-color:transparent">`;
     let closingTag = `</code>`;
     let codeArr = s.split(BLANK);
     let output = "";
@@ -89,13 +89,16 @@ export default function Question({children, starterCode, language, correctAnswer
       output+= openingTag;
       codeChunks = codeArr[i].trim().split("\n");
       console.log(`Code chunks ${codeChunks}`);
-      for (let j =0; j < codeChunks.length; j++) {
+      for (let j = 0; j < codeChunks.length; j++) {
         if (codeChunks[j].trim() == "") {continue;}
         
         output += Prism.highlight(codeChunks[j], pythonGrammar, "python");
-        if (j != codeArr[i].length-1) {
+        output += closingTag;
+        if (j != codeChunks.length-1) {
+          console.log(`${j} != ${codeChunks.length}`);
           output += "<br>";
       }
+
       
       }
       
@@ -107,7 +110,6 @@ export default function Question({children, starterCode, language, correctAnswer
     }
     output += closingTag;
     console.log(`Replacing ${openingTag + closingTag}`)
-    output = output.replaceAll(openingTag + closingTag, "");
     output = output.replaceAll(openingTag + closingTag, "");
     output = output.replaceAll(openingTag + " " + closingTag, "");
     console.log(`Output ${output}`)
