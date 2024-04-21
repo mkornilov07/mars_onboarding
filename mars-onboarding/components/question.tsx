@@ -99,7 +99,9 @@ export default function Question({children, starterCode, language, correctAnswer
         if (j != codeChunks.length-1) {
           console.log(`${j} != ${codeChunks.length}`);
           output += "<br>";
+		  output += openingTag;
       }
+	  
 
       
       }
