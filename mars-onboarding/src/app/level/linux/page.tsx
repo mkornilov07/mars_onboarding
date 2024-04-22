@@ -15,9 +15,12 @@ export default function LinuxLevel() {
          running <code>program1 | program2</code>. </p>
     </>);
     let starterCode = `
-Dog
-Dog
-Cat`;
+#We are running code from the NVIDIA Jetson. Our startup scripts, start1.sh and start2.sh, establish the link between the Jetson and the control station.
+#First, we need to append "nvidia" to the end of the file /etc/hosts to allow the connection.
+BLANK
+./start1.sh
+#The rest of the networking operations are done by the second startup script, but it takes the Jetson's IP address as an argument. How can we give it the address without copy-pasting?
+BLANK`;
     return (
-        <Level lesson = {lesson} title = {title} starterCode={starterCode} language='bash' correctAnswers={[""]} levelName='Linux Level'></Level>
+        <Level lesson = {lesson} title = {title} starterCode={starterCode} language='bash' correctAnswers={['echo "nvidia" >> /etc/hosts', 'hostname -I | start2.sh']} levelName='Linux Level'></Level>
 )};

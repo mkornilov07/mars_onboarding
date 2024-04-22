@@ -9,6 +9,7 @@ import 'prismjs/components/prism-python';
 import { Fireworks } from 'fireworks-js'
 import 'prismjs/components/prism-bash.js';
 import 'prism-themes/themes/prism-xonokai.css';
+import Link from 'next/link';
 const pythonGrammar = {
 	'comment': {
 		pattern: /(^|[^\\])#.*/,
@@ -80,7 +81,7 @@ export default function Question({children, starterCode, language, correctAnswer
     s=s.trim();
     const BLANK = "BLANK";
     const LEN_BLANK=BLANK.length;
-    let openingTag = `<code class = "language-${language}" style = "box-shadow:none; border:none; text-shadow: none; background-color:transparent">`;
+    let openingTag = `<code class = "language-${language}" style = "box-shadow:none; font-size: 15px; border:none; text-shadow: none; background-color:transparent">`;
     let closingTag = `</code>`;
     let codeArr = s.split(BLANK);
     let output = "";
@@ -91,7 +92,6 @@ export default function Question({children, starterCode, language, correctAnswer
       codeChunks = codeArr[i].split("\n");
       console.log(`Code chunks ${codeChunks}`);
       for (let j = 0; j < codeChunks.length; j++) {
-        if (codeChunks[j] == "") {continue;}
         
         if (language == "python") output += Prism.highlight(codeChunks[j], pythonGrammar, "python");
         else if (language == "bash") output += Prism.highlight(codeChunks[j], Prism.languages.bash, "bash");
@@ -101,13 +101,10 @@ export default function Question({children, starterCode, language, correctAnswer
           output += "<br>";
 		  output += openingTag;
       }
-	  
-
-      
       }
       
       if(i != codeArr.length - 1)  {
-        output += `<input autocomplete='off' id = 'blank${i}'  placeholder = "enter code here" class = "shadow-inner border-none font-mono shadow-black p-2 hover:bg-zinc-800 hover:bg-opacity-80 focus:bg-zinc-800 focus:bg-opacity-80 caret-red-500 tracking-wide outline-none cursor-text text-red-500 font-normal rounded"></input>`;
+        output += `<input spellcheck='false' autocomplete='off' id = 'blank${i}'  placeholder = "enter code here" class = "w-300 shadow-inner border-none font-mono shadow-black p-2 hover:bg-zinc-800 hover:bg-opacity-80 focus:bg-zinc-800 focus:bg-opacity-80 caret-red-500 tracking-wide outline-none cursor-text text-white-500 font-normal rounded"></input>`;
       output += openingTag;
       }
       output += closingTag;
@@ -128,18 +125,20 @@ export default function Question({children, starterCode, language, correctAnswer
       // console.log(`Correct answer is ${correctAnswers[i]}`)
       if (response == correctAnswers[i]) {
         console.log("Good");
-        box?.animate([{"color": "lightgreen"}, {"color": "black"}], 2000);
+        box?.animate([{"color": "green"}, {"color": "white"}], 2000);
       }
       else {
         console.log("Bad");
         allCorrect = false;
-        box?.animate([{"color": "black"}, {"color": "red"}], 2000);
+        box?.animate([{"color": "red"}, {"color": "white"}], 2000);
       }
       
     }
     if(allCorrect) {
       // fireworks({sounds:false});
       setQuestionComplete(true);
+	  const fireworks = new Fireworks(document.getElementById("q"), {explosion: 6, particles:120, friction: 0.98 });
+		fireworks.start();
     }
   }
   const [rendered, setRendered] = useState(false);
@@ -148,11 +147,16 @@ export default function Question({children, starterCode, language, correctAnswer
   className = "bg-zinc-800 rounded p-5"></div>
     return (
       (<div>
+		<div className="z-0">
         {rendered && codeElement}
+		</div>
         <br/>
-        <button className ="bg-red-800 active:shadow-[0_0_5px_#666] opacity-80 cursor-pointer border-red-600 hover:shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#08f,0_0_15px_#08f,0_0_30px_#08f] hover:shadow-red-600 hover:bg-red-800 hover:opacity-80 text-white font-bold py-2 px-4 rounded" onClick = {onSubmit}>
+        {questionComplete ? <Link href = "/level" ><button className ="bg-green-800 active:shadow-[0_0_5px_#666] opacity-80 cursor-pointer border-green-600 hover:shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#08f,0_0_15px_#08f,0_0_30px_#08f] hover:shadow-green-600 hover:bg-green-800 hover:opacity-80 text-white font-bold py-2 px-4 rounded" onClick = {onSubmit}>
+          Next Level
+        </button></Link> : <button className ="bg-red-800 active:shadow-[0_0_5px_#666] opacity-80 cursor-pointer border-red-600 hover:shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#08f,0_0_15px_#08f,0_0_30px_#08f] hover:shadow-red-600 hover:bg-red-800 hover:opacity-80 text-white font-bold py-2 px-4 rounded" onClick = {onSubmit}>
           Submit
-        </button>
+        </button> }
+		<div><canvas id = "q" className="pointer-events-none relative w-[900px] h-[1000px] -top-[400px]"></canvas></div>
       </div>)
     )
 }

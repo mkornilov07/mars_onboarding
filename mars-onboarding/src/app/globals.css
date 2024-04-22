@@ -20,7 +20,7 @@ body {
   color: rgb(var(--background-rgb));
   background: rgb(var(--foreground-rgb));
   text-emphasis-color: rgb(var(--background-header-rgb));
-  overflow: hidden;
+  /* overflow: hidden; */
 } 
 
 @layer utilities {
