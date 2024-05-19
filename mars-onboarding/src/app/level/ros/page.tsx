@@ -1,11 +1,9 @@
-'use client'
-import React from 'react';
 import Link from 'next/link';
 import Popup from '../../../../components/Popup';
 import Level from '../../../../components/Level';
 
 
-export default function ROSLevel({children} : {children: React.ReactNode}) {
+export default function ROSLevel() {
     
     let lesson = (<><p>A node that publishes messages in a topic is called a <b className='font-extrabold'>publisher</b>.
     A node that listens to a topic and performs actions based on what messages it receives is called a <b className='font-extrabold'>subscriber</b>.</p>
@@ -33,7 +31,7 @@ def main():
 if __name__ == "__main__":
     main()
 `
-    let title = (<>Subscribers and Publishers</>);
+    let title = (<p>Subscribers and Publishers</p>);
     return (
     <Level lesson = {lesson} title = {title} starterCode={starterCode} language='python' correctAnswers={
         ['pub.publish(String("yes"))', 'pub.publish(String("no"))', '"ir_readings", Int64, callback']} levelName='ROS Level'></Level>

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Popup from "../../../../components/Popup";
 import Level from "../../../../components/Level";
-import 'prismjs/components/prism-python';
+// import 'prismjs/components/prism-python';
 
 export default function GitLevel() {
     let lesson = (<p>You'll need this</p>);
