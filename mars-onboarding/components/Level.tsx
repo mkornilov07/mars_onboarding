@@ -19,6 +19,11 @@ lesson : ReactNode, title : ReactNode, language : string, starterCode : string, 
                 <div className = "m-10 place-content-center">
                     <Popup contents = {lesson} title = {title}></Popup>
                 </div>
+                <Link href = "/login/">
+                    <button>
+                        Log In With Google
+                    </button>
+                </Link>
             </div>
             <div className = "z-0 flex-col select-none min-h-screen w-full bg-zinc-900 text-white">
                 <div className = "flex container mx-auto flex-col max-w-[900px] align-items-center space-evenly">
