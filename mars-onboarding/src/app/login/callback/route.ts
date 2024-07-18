@@ -12,12 +12,18 @@ export async function GET(request: Request): Promise<Response> {
 	if (!code || !state || !storedState || !storedCodeVerifier || state !== storedState) {
 		return new Response(null, {
 			status: 400, 
-			headers: {msg: 'invalid request'},
+			statusText: "first",
 		});
 	}
 
 	try {
 		const tokens = await google.validateAuthorizationCode(code, storedCodeVerifier);
+
+		return new Response(null, {
+			status: 600, 
+			statusText: "bruh",
+		});
+
 		const googleUserResponse = await fetch("https://openidconnect.googleapis.com/v1/userinfo", {
 			headers: {
 				Authorization: `Bearer ${tokens.accessToken}`
@@ -25,7 +31,7 @@ export async function GET(request: Request): Promise<Response> {
 		});
 		const googleUser: GoogleUser = await googleUserResponse.json();
 
-		const existingUser = db.prepare("SELECT id FROM Users WHERE id = ?").get(googleUser.id);
+		const existingUser : any = db.prepare("SELECT id FROM Users WHERE id = ?").get(googleUser.id);
 
 		if (existingUser) { // new Response.redirect([level url])
 			const session = await lucia.createSession(existingUser.id, {});
