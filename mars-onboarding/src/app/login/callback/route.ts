@@ -35,7 +35,7 @@ export async function GET(request: Request): Promise<Response> {
 		// 	}
 		// });
 		console.log(googleUser)
-		const existingUser : any = db.prepare("SELECT id FROM Users WHERE id = ?").get(googleUser.id);
+		const existingUser : any = db.prepare("SELECT id FROM Users WHERE id = ?").get(googleUser.sub);
 		
 		if (existingUser) { // new Response.redirect([level url])
 			const session = await lucia.createSession(existingUser.id, {});
@@ -44,7 +44,7 @@ export async function GET(request: Request): Promise<Response> {
 			return new Response(null, {
 				status: 302,
 				headers: {
-					Location: "/"
+					Location: "/level/"
 				}
 			});
 		}
@@ -62,14 +62,15 @@ export async function GET(request: Request): Promise<Response> {
 			db.prepare("INSERT INTO Users ( id ) VALUES (?)").run(googleUser.sub);
 		}
 		catch(e : any) {
-		if(e instanceof SqliteError) {}
-		else return new Response(null, {
-			status: 598, 
-			statusText: e,
-			headers: {"GoogleUser": JSON.stringify(googleUser),
-						"google_id" : googleUser.sub 
-			}
-		});}
+			if(e instanceof SqliteError) {}
+			else return new Response(null, {
+				status: 598, 
+				statusText: e,
+				headers: {"GoogleUser": JSON.stringify(googleUser),
+							"google_id" : googleUser.sub 
+				}
+			});
+		}
 		const session = await lucia.createSession(googleUser.sub, {});
 		const sessionCookie = lucia.createSessionCookie(session.id);
 		cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
