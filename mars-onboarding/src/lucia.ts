@@ -1,16 +1,16 @@
-// auth/lucia.ts
+'use server';
 import { Lucia } from "lucia";
 import { Google } from "arctic";
 import { BetterSqlite3Adapter } from "@lucia-auth/adapter-sqlite";
 import { cookies } from "next/headers";
 import { cache } from "react";
 import type { Session, User } from "lucia";
-import sqlite from "better-sqlite3";
+import { redirect } from "next/navigation";
 
 import Database from 'better-sqlite3';
 export const db = new Database('users.db');
 db.pragma('journal_mode = WAL');
-db.prepare("CREATE TABLE IF NOT EXISTS Users(id TEXT NOT NULL PRIMARY KEY)").run();
+db.prepare("CREATE TABLE IF NOT EXISTS Users(id TEXT NOT NULL PRIMARY KEY, picture TEXT)").run();
 db.prepare(`CREATE TABLE IF NOT EXISTS session (
     id TEXT NOT NULL PRIMARY KEY,
     expires_at INTEGER NOT NULL,
@@ -34,7 +34,7 @@ export const lucia = new Lucia(adapter, {
 		return {
 			// attributes has the type of DatabaseUserAttributes
 			googleId: attributes.google_id,
-			username: attributes.username
+			picture: attributes.picture
 		};
 	}
 });
@@ -48,7 +48,7 @@ declare module "lucia" {
 
 interface DatabaseUserAttributes {
 	google_id: number;
-	username: string;
+	picture: string;
 }
 
 export const google = new Google(

@@ -34,7 +34,7 @@ export async function GET(request: Request): Promise<Response> {
 		// 		googleuser: JSON.stringify(googleUser)
 		// 	}
 		// });
-		console.log(googleUser)
+
 		const existingUser : any = db.prepare("SELECT id FROM Users WHERE id = ?").get(googleUser.sub);
 		
 		if (existingUser) { // new Response.redirect([level url])
@@ -52,14 +52,7 @@ export async function GET(request: Request): Promise<Response> {
 		// below only runs when new user
 		// const userId : string = generateIdFromEntropySize(10); // 16 characters long
 		try {
-			db.prepare("CREATE TABLE IF NOT EXISTS Users(id TEXT NOT NULL PRIMARY KEY)").run();
-			db.prepare(`CREATE TABLE IF NOT EXISTS session (
-				id TEXT NOT NULL PRIMARY KEY,
-				expires_at INTEGER NOT NULL,
-				user_id TEXT NOT NULL,
-				FOREIGN KEY (user_id) REFERENCES Users(id)
-			)`).run();
-			db.prepare("INSERT INTO Users ( id ) VALUES (?)").run(googleUser.sub);
+			db.prepare("INSERT INTO Users ( id, picture ) VALUES (?, ?)").run(googleUser.sub, googleUser.picture);
 		}
 		catch(e : any) {
 			if(e instanceof SqliteError) {}
