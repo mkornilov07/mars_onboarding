@@ -10,10 +10,16 @@ import sqlite from "better-sqlite3";
 import Database from 'better-sqlite3';
 export const db = new Database('users.db');
 db.pragma('journal_mode = WAL');
-db.prepare("CREATE TABLE IF NOT EXISTS Users(id TEXT)");
+db.prepare("CREATE TABLE IF NOT EXISTS Users(id TEXT NOT NULL PRIMARY KEY)").run();
+db.prepare(`CREATE TABLE IF NOT EXISTS session (
+    id TEXT NOT NULL PRIMARY KEY,
+    expires_at INTEGER NOT NULL,
+    user_id TEXT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES Users(id)
+)`).run();
 
 const adapter = new BetterSqlite3Adapter(db, {
-	user: "user",
+	user: "Users",
 	session: "session"
 });
 
