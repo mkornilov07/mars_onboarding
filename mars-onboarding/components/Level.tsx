@@ -1,4 +1,4 @@
-"use client"
+"use server"
 import Link from "next/link";
 import Popup from "./Popup";
 import { ReactNode, useState } from "react";
@@ -11,7 +11,7 @@ import { useEffect } from "react";
 import User from "./User";
 
 // const NoSSR = dynamic(() => import('../components/question'), { ssr: false })
-export default function Level({
+export default async function Level({
 lesson, title, language, starterCode, correctAnswers, levelName
 } : {
 lesson : ReactNode, title : ReactNode, language : string, starterCode : string, correctAnswers: string[], levelName: string
