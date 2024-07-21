@@ -1,5 +1,5 @@
 import { generateState, generateCodeVerifier } from "arctic";
-import { google } from "@/lucia";
+import { google } from "@/lib/lucia";
 import { cookies } from "next/headers";
 
 export async function GET(): Promise<Response> {

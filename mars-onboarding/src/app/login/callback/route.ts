@@ -1,4 +1,5 @@
-import { google, lucia, db } from "@/lucia";
+import { google, lucia } from "@/lib/lucia"
+import {db} from "@/lib/db"
 import { cookies } from "next/headers";
 import { OAuth2RequestError } from "arctic";
 import { generateIdFromEntropySize } from "lucia";

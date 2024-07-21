@@ -5,9 +5,10 @@ import { ReactNode, useState } from "react";
 import { start } from "repl";
 import dynamic from 'next/dynamic'
 import Question from "./question";
-import { validateRequest } from "@/lucia";
+// import { validateRequest } from "@/lucia";
 import getUser from "./User";
 import { useEffect } from "react";
+import User from "./User";
 
 // const NoSSR = dynamic(() => import('../components/question'), { ssr: false })
 export default function Level({
@@ -23,7 +24,7 @@ lesson : ReactNode, title : ReactNode, language : string, starterCode : string, 
                 <div className = "m-10 place-content-center">
                     <Popup contents = {lesson} title = {title}></Popup>
                 </div>
-                {user}
+                <User/>
             </div>
             <div className = "z-0 flex-col select-none min-h-screen w-full bg-zinc-900 text-white">
                 <div className = "flex container mx-auto flex-col max-w-[900px] align-items-center space-evenly">

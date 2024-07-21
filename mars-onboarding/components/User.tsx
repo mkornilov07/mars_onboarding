@@ -1,20 +1,17 @@
-'use client';
-import { validateRequest } from "../src/lucia";
+'use server'
+import { validateRequest } from "../src/lib/lucia";
 import { redirect } from "next/dist/server/api-utils";
-import { db } from "../src/lucia";
+import { getPic } from "../src/lib/lucia";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, SetStateAction } from "react";
 
-export default function User(){
-	const [pic, setPic] = useState("");
-    useEffect(() => {
-		const getUser = async function(){
-			return await validateRequest();
-		}
-		if (!getUser()) {
-			return (<Link href='/login/'></Link>);
-		}
+export default async function User(){
+    const { user } = await validateRequest();
+	if(!user) {
+		return <Link href = "/login">Login with Google</Link>;
+	}
+	else {
+		return <img src = {user.picture}></img>;
+	}
 
-		const pfp = db.prepare("SELECT picture FROM Users WHERE id = ?").get(user.id);
-    });
 }

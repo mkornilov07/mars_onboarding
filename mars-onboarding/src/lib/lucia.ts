@@ -1,22 +1,12 @@
-'use server';
 import { Lucia } from "lucia";
 import { Google } from "arctic";
 import { BetterSqlite3Adapter } from "@lucia-auth/adapter-sqlite";
-import { cookies } from "next/headers";
 import { cache } from "react";
 import type { Session, User } from "lucia";
 import { redirect } from "next/navigation";
+import { db } from "./db";
+import { cookies } from "next/headers";
 
-import Database from 'better-sqlite3';
-export const db = new Database('users.db');
-db.pragma('journal_mode = WAL');
-db.prepare("CREATE TABLE IF NOT EXISTS Users(id TEXT NOT NULL PRIMARY KEY, picture TEXT)").run();
-db.prepare(`CREATE TABLE IF NOT EXISTS session (
-    id TEXT NOT NULL PRIMARY KEY,
-    expires_at INTEGER NOT NULL,
-    user_id TEXT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES Users(id)
-)`).run();
 
 const adapter = new BetterSqlite3Adapter(db, {
 	user: "Users",
@@ -38,23 +28,10 @@ export const lucia = new Lucia(adapter, {
 		};
 	}
 });
-
-declare module "lucia" {
-	interface Register {
-		Lucia: typeof lucia;
-		DatabaseUserAttributes: DatabaseUserAttributes;
-	}
+export async function getPic(id : string) : Promise<any> {
+	return db.prepare("SELECT picture FROM Users WHERE id = ?").get(id)
 }
 
-interface DatabaseUserAttributes {
-	google_id: number;
-	picture: string;
-}
-
-export const google = new Google(
-	process.env.GOOGLE_CLIENT_ID!, process.env.GOOGLE_CLIENT_SECRET!,
-	"http://localhost:3000/login/callback"
-);
 
 export const validateRequest = cache(
 	async (): Promise<{ user: User; session: Session } | { user: null; session: null }> => {
@@ -80,4 +57,22 @@ export const validateRequest = cache(
 		} catch {}
 		return result;
 	}
+);
+
+
+declare module "lucia" {
+	interface Register {
+		Lucia: typeof lucia;
+		DatabaseUserAttributes: DatabaseUserAttributes;
+	}
+}
+
+interface DatabaseUserAttributes {
+	google_id: number;
+	picture: string;
+}
+
+export const google = new Google(
+	process.env.GOOGLE_CLIENT_ID!, process.env.GOOGLE_CLIENT_SECRET!,
+	"http://localhost:3000/login/callback"
 );
