@@ -9,6 +9,7 @@ import Question from "./question";
 import getUser from "./User";
 import { useEffect } from "react";
 import User from "./User";
+import LevelSelector from "./LevelSelector";
 
 // const NoSSR = dynamic(() => import('../components/question'), { ssr: false })
 export default async function Level({
@@ -25,6 +26,7 @@ lesson : ReactNode, title : ReactNode, language : string, starterCode : string, 
                     <Popup contents = {lesson} title = {title}></Popup>
                 </div>
                 <User/>
+                <LevelSelector category = "git"></LevelSelector>
             </div>
             <div className = "z-0 flex-col select-none min-h-screen w-full bg-zinc-900 text-white">
                 <div className = "flex container mx-auto flex-col max-w-[900px] align-items-center space-evenly">

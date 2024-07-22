@@ -30,6 +30,7 @@
     "react-dom": "^18",
     "react-simple-code-editor": "^0.13.1",
     "react-syntax-highlighter": "^15.5.0",
+    "rsuite": "^5.67.0",
     "tailwind-variants": "^0.2.1",
     "tailwindcss-animatecss": "^3.0.5",
     "tsparticles": "^3.3.0",
