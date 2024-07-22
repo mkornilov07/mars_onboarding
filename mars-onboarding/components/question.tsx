@@ -1,5 +1,5 @@
 'use client'
-// Validation ideas: replace ' with " in both strings, replace any whitespace with whitespace regex, add maximal whitespaces to answer keys, match submitted answer using key as pattern
+// Validation ideas: replace ' with " in both strings, replace any whitespace with whitespace regex, add maximal whitespaces to answer keys manually, match submitted answer using key as pattern
 import { ReactDOM, createElement, useEffect, useState } from 'react';
 import React, { JSXElementConstructor } from 'react';
 import Prism from 'prismjs';

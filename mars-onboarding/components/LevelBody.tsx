@@ -1,8 +1,7 @@
 'use client'
 import { questionData } from "./Level"
-import { levelIndex } from "./LevelSelector"
 import Question from "./Question"
-export default function LevelBody({sectionData, language}:{sectionData: Array<questionData>, language : string}) {
+export default function LevelBody({sectionData, language, levelIndex}:{sectionData: Array<questionData>, language : string, levelIndex : number}) {
     return <Question
     language = {language}
     starterCode = {sectionData[levelIndex].starterCode}
