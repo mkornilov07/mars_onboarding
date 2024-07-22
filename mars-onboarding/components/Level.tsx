@@ -4,7 +4,7 @@ import Popup from "./Popup";
 import { ReactNode } from "react";
 import { start } from "repl";
 import dynamic from 'next/dynamic'
-import Question from "./question";
+import Question from "./Question";
 // import { validateRequest } from "@/lucia";
 import getUser from "./User";
 import { useEffect } from "react";
@@ -33,7 +33,7 @@ section : string, lesson : ReactNode, title : ReactNode, language : string, star
                 <div className = "flex container mx-auto flex-col max-w-[900px] align-items-center space-evenly">
                     <p className = "flex text-zinc-900 bg-zinc-900">empty placeholder</p>
                     <p className = "flex text-zinc-900 bg-zinc-900">empty placeholder</p>
-                    <Question language={language} starterCode={starterCode} correctAnswers={correctAnswers}><div></div></Question>
+                    <Question language={language} starterCode={starterCode} correctAnswers={correctAnswers}></Question>
                 </div>
             </div>
         </div>);
@@ -54,7 +54,8 @@ const data : allQuestionData = {
         title : (<code className="bg-transparent">git reset --hard</code>),
         starterCode : "#Oh no! You accidentally messed up the codebase. What do you do? \nBLANK",
         correctAnswers : ["git reset --hard"]
-    },],
+        },
+    ],
     "linux" : [
         {lesson: 
             (<><p>Every program (and command) in Linux takes an input and produces an output. We can use redirection to 
@@ -75,7 +76,8 @@ BLANK
 #The rest of the networking operations are done by the second startup script, but it takes the Jetson's IP address as an argument. How can we give it the address without copy-pasting?
 BLANK`,
         correctAnswers: ['echo "nvidia" >> /etc/hosts', 'hostname -I | start2.sh']
-    },],
+        },
+    ],
     "ros": [
         {lesson: (<><p>A node that publishes messages in a topic is called a <b className='font-extrabold'>publisher</b>.
             A node that listens to a topic and performs actions based on what messages it receives is called a <b className='font-extrabold'>subscriber</b>.</p>

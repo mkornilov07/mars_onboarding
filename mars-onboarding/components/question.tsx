@@ -1,5 +1,5 @@
 'use client'
-
+// Validation ideas: replace ' with " in both strings, replace any whitespace with whitespace regex, add maximal whitespaces to answer keys, match submitted answer using key as pattern
 import { ReactDOM, createElement, useEffect, useState } from 'react';
 import React, { JSXElementConstructor } from 'react';
 import Prism from 'prismjs';
@@ -72,7 +72,7 @@ const pythonGrammar = {
 	'punctuation': /[{}[\];(),.:]/
 };
 
-export default function Question({children, starterCode, language, correctAnswers} : {children : React.ReactNode, starterCode : string, language : string, correctAnswers: string[]}) {
+export default function Question({starterCode, language, correctAnswers} : {starterCode : string, language : string, correctAnswers: string[]}) {
 	Prism.highlightAll();
 	const [questionComplete, setQuestionComplete] = useState(false);
   	useEffect(() => Prism.highlightAll(), []);
