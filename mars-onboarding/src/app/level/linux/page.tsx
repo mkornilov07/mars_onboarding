@@ -22,5 +22,5 @@ BLANK
 #The rest of the networking operations are done by the second startup script, but it takes the Jetson's IP address as an argument. How can we give it the address without copy-pasting?
 BLANK`;
     return (
-        <Level lesson = {lesson} title = {title} starterCode={starterCode} language='bash' correctAnswers={['echo "nvidia" >> /etc/hosts', 'hostname -I | start2.sh']} levelName='Linux Level'></Level>
+        <Level section = "linux" lesson = {lesson} title = {title} starterCode={starterCode} language='bash' correctAnswers={['echo "nvidia" >> /etc/hosts', 'hostname -I | start2.sh']} levelName='Linux Level'></Level>
 )};

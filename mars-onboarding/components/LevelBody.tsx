@@ -1,6 +1,6 @@
 'use client'
 import { questionData } from "./Level"
-import { levelNumber } from "./LevelSelector"
+import { levelIndex } from "./LevelSelector"
 export default function LevelBody({sectionData}:{sectionData: Array<questionData>}) {
-    return <></>
+    return sectionData
 }

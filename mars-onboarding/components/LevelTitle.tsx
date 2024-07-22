@@ -1,5 +1,6 @@
 'use client'
-import { levelNumber } from "./LevelSelector"
-export default function LevelTitle() {
-    return <></>
+import React from "react"
+import { levelIndex } from "./LevelSelector"
+export default function LevelTitle({titles} : {titles: Array<React.JSX.Element>}) {
+    return titles[levelIndex]
 }

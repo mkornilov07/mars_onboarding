@@ -33,6 +33,6 @@ if __name__ == "__main__":
 `
     let title = (<p>Subscribers and Publishers</p>);
     return (
-    <Level lesson = {lesson} title = {title} starterCode={starterCode} language='python' correctAnswers={
+    <Level section = "ros" lesson = {lesson} title = {title} starterCode={starterCode} language='python' correctAnswers={
         ['pub.publish(String("yes"))', 'pub.publish(String("no"))', '"ir_readings", Int64, callback']} levelName='ROS Level'></Level>
 )};
