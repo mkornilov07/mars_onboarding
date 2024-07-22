@@ -3,8 +3,9 @@ import React, { ReactNode, useEffect } from "react";
 import 'animate.css';
 import '/public/stylesheets/popup.css';
 import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, ModalProps} from "@nextui-org/react";
+import LevelTitle from "./LevelTitle";
 
-export default function Popup({contents, title} : {contents: ReactNode, title: ReactNode}) {
+export default function Popup({contents} : {contents: ReactNode}) {
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
     const [scrollBehavior, setScrollBehavior] = React.useState<ModalProps["scrollBehavior"]>("inside");
     useEffect(onOpen, [contents]);
@@ -37,7 +38,7 @@ export default function Popup({contents, title} : {contents: ReactNode, title: R
             {(onClose) => (
             <>
             <div className = "animate__animated animate__lightSpeedInRight scale-75 transform right-1 fixed"><img src = "/icons/rover.png"></img></div>
-                <ModalHeader className="flex flex-col gap-1">{title}</ModalHeader>
+                <ModalHeader className="flex flex-col gap-1"><LevelTitle></LevelTitle></ModalHeader>
                 <ModalBody>{contents}
                 </ModalBody>
                 <ModalFooter>
