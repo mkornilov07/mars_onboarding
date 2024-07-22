@@ -76,3 +76,23 @@ export const google = new Google(
 	process.env.GOOGLE_CLIENT_ID!, process.env.GOOGLE_CLIENT_SECRET!,
 	"http://localhost:3000/login/callback"
 );
+
+export async function logout(): Promise<ActionResult> {
+	"use server";
+	const { session } = await validateRequest();
+	if (!session) {
+		return {
+			error: "Unauthorized"
+		};
+	}
+
+	await lucia.invalidateSession(session.id);
+
+	const sessionCookie = lucia.createBlankSessionCookie();
+	cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
+	// return redirect("/login");
+}
+
+interface ActionResult {
+	error: string | null;
+}
