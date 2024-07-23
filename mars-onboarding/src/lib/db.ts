@@ -8,3 +8,8 @@ db.prepare(`CREATE TABLE IF NOT EXISTS session (
     user_id TEXT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES Users(id)
 )`).run();
+db.prepare(`CREATE TABLE IF NOT EXISTS solves (
+    userId TEXT NOT NULL,
+    questionIndex INTEGER NOT NULL,
+    category TEXT NOT NULL,
+    FOREIGN KEY (userId) REFERENCES Users(id))`).run()

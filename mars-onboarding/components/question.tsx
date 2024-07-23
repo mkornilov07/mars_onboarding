@@ -72,10 +72,21 @@ const pythonGrammar = {
 	'punctuation': /[{}[\];(),.:]/
 };
 
-export default function Question({starterCode, language, correctAnswers} : {starterCode : string, language : string, correctAnswers: string[]}) {
+export default function Question({submitFunc, starterCode, language, correctAnswers, questionId, category, validateReq} : {validateReq : any, submitFunc: (id : string, qid : number, cat : string) => Promise<void>, starterCode : string, language : string, correctAnswers: string[], questionId : number, category : string}) {
 	Prism.highlightAll();
 	const [questionComplete, setQuestionComplete] = useState(false);
   	useEffect(() => Prism.highlightAll(), []);
+	useEffect(()=>{
+		async function a() {
+			let user = (await validateReq())
+			if (user != null) {
+				submitFunc(user.id, questionId, category)
+			}
+		}
+		if (questionComplete) {
+			a()
+		}
+	}, [questionComplete])
   	function replaceBlanks(s : string, language : string) {
     // s = s.replaceAll('\n', '<br>');
     // console.log(`Replacing BLANK in ${s}`);

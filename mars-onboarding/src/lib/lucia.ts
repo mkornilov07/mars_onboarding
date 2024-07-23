@@ -28,11 +28,25 @@ export const lucia = new Lucia(adapter, {
 		};
 	}
 });
-export async function getPic(id : string) : Promise<any> {
-	return db.prepare("SELECT picture FROM Users WHERE id = ?").get(id)
+
+export async function dog(id : string, category : string) {
+	return db.prepare("SELECT questionIndex FROM solves WHERE userId = ? AND category = ?").all(id, category);
 }
 
+export async function getSolvedQuestions(id : string, category : string) {
+	'use server'
+	return db.prepare("SELECT questionIndex FROM solves WHERE userId = ? AND category = ?").all(id, category);
+}
 
+export async function solveQuestion(userId : string, questionIndex: number, category : string) {
+	'use server'
+	db.prepare("INSERT INTO solves (userId, questionIndex, category) VALUES (?, ?, ?)").run(userId, questionIndex, category);
+}
+
+export async function getCurrentUser() {
+	'use server'
+	return (await validateRequest()).user
+}
 export const validateRequest = cache(
 	async (): Promise<{ user: User; session: Session } | { user: null; session: null }> => {
 		const sessionId = cookies().get(lucia.sessionCookieName)?.value ?? null;
@@ -77,7 +91,7 @@ export const google = new Google(
 	"http://localhost:3000/login/callback"
 );
 
-export async function logout(): Promise<ActionResult> {
+export async function logout(): Promise<ActionResult | void> {
 	"use server";
 	const { session } = await validateRequest();
 	if (!session) {

@@ -1,11 +1,11 @@
 "use client"
+import { validateRequest, getSolvedQuestions, solveQuestion, getCurrentUser} from "@/lib/lucia";
 import Link from "next/link";
 import Popup from "./Popup";
 import { ReactNode, useState } from "react";
 import { start } from "repl";
 import dynamic from 'next/dynamic'
 import Question from "./Question";
-// import { validateRequest } from "@/lucia";
 import getUser from "./User";
 import { useEffect } from "react";
 import User from "./User";
@@ -15,9 +15,9 @@ import LevelBody from "./LevelBody";
 
 // const NoSSR = dynamic(() => import('../components/question'), { ssr: false })
 export default async function Level({
-    section, suffix, language, solvedQuestions
+    section, suffix, language, solvedQuestions, submitFunc, validateReq
 } : {
-section : string, suffix : string, language : string, solvedQuestions : Array<number>
+section : string, suffix : string, language : string, solvedQuestions : Array<number>, submitFunc: (id : string, qid : number, cat : string) => Promise<void>, validateReq : any
 }) {
     const [levelIndex, setLevelIndex] = useState(0);
     const titles = data[section].map(question => question.title)
@@ -38,7 +38,7 @@ section : string, suffix : string, language : string, solvedQuestions : Array<nu
                 <div className = "flex container mx-auto flex-col max-w-[900px] align-items-center space-evenly">
                     <p className = "flex text-zinc-900 bg-zinc-900">empty placeholder</p>
                     <p className = "flex text-zinc-900 bg-zinc-900">empty placeholder</p>
-                    <LevelBody levelIndex={levelIndex} language = {language} sectionData={data[section]}/>
+                    <LevelBody levelIndex={levelIndex} language = {language} sectionData={data[section]} submitFunc={submitFunc} validateReq = {validateReq} section={section} questionIndex={levelIndex}/>
                 </div>
             </div>
         </div>);
