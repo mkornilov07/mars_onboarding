@@ -25,11 +25,13 @@ section : string, suffix : string, language : string, solvedQuestions : Array<nu
         <div>
             <div className = "flex opacity-90 shadow-md shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#08f,0_0_15px_#08f] shadow-black text-white bg-black sticky justify-evenly top w-full h-30">
                 <Link href = "/level/" className = "text-white opacity-60 hover:opacity-100 m-5 self-center content-start select-none text-5xl hover:text-red-700">⬅</Link>
+                <div className = "flex-row m-6">
                 <h1 className = "m-10 select-none opacity-90 font-bold font-mono text-4xl place-self-center">
                     {data[section][levelIndex].title} {"("}{suffix} {levelIndex}{")"}
                 </h1>
                 <div className = "m-10 place-content-center">
                     <Popup contents = {data[section][levelIndex].lesson} title = {data[section][levelIndex].title}></Popup>
+                </div>
                 </div>
                 <User/>
                 <LevelSelector solvedQuestions = {solvedQuestions} titles = {titles} setLevelIndex={setLevelIndex} ></LevelSelector>
