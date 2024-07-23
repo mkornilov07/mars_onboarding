@@ -7,7 +7,7 @@ import { Button } from "@nextui-org/react";
 export default function LevelSelector({titles, solvedQuestions, setLevelIndex} : {setLevelIndex: (i : number) => void, titles: Array<React.JSX.Element>, solvedQuestions: Array<number>}) {
     
     let formattedTitles : Array<React.JSX.Element> = titles.map((title, i) => 
-        <>{i}. {title}{solvedQuestions.includes(i) ? " (V)" : ""}</>
+        <>{i}. {title}{solvedQuestions.includes(i) ? <text className = "text-lime-500">✓</text> : ""}</>
     )
     let itemList : Array<React.JSX.Element> = formattedTitles.map((title, i) =>
     <Dropdown.Item onSelect = {()=>setLevelIndex(i)}>{title}</Dropdown.Item>)
