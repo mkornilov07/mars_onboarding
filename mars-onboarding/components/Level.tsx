@@ -1,5 +1,4 @@
 "use client"
-import { validateRequest, getSolvedQuestions, solveQuestion, getCurrentUser} from "@/lib/lucia";
 import Link from "next/link";
 import Popup from "./Popup";
 import { ReactNode, useState } from "react";
@@ -15,9 +14,9 @@ import LevelBody from "./LevelBody";
 
 // const NoSSR = dynamic(() => import('../components/question'), { ssr: false })
 export default async function Level({
-    section, suffix, language, solvedQuestions, submitFunc, validateReq
+    section, suffix, language, solvedQuestions, submitFunc, validateReq, logout
 } : {
-section : string, suffix : string, language : string, solvedQuestions : Array<number>, submitFunc: (id : string, qid : number, cat : string) => Promise<void>, validateReq : any
+section : string, suffix : string, language : string, solvedQuestions : Array<number>, submitFunc: (id : string, qid : number, cat : string) => Promise<void>, validateReq : any, logout : any
 }) {
     const [levelIndex, setLevelIndex] = useState(0);
     const titles = data[section].map(question => question.title)
@@ -33,7 +32,7 @@ section : string, suffix : string, language : string, solvedQuestions : Array<nu
                     <Popup contents = {data[section][levelIndex].lesson} title = {data[section][levelIndex].title}></Popup>
                 </div>
                 </div>
-                <User/>
+                <User logout = {logout} validateReq={validateReq}/>
                 <LevelSelector solvedQuestions = {solvedQuestions} titles = {titles} setLevelIndex={setLevelIndex} ></LevelSelector>
             </div>
             <div className = "z-0 flex-col select-none min-h-screen w-full bg-zinc-900 text-white">

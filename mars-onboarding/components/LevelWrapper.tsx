@@ -1,6 +1,6 @@
 'use server'
 import Level from "./Level";
-import { validateRequest, getSolvedQuestions, solveQuestion, getCurrentUser} from "@/lib/lucia";
+import { validateRequest, getSolvedQuestions, solveQuestion, getCurrentUser, logout} from "@/lib/lucia";
 import { GetServerSideProps } from "next";
 import { cache, use } from "react";
 const fetchSolvedQuestions = cache(async (section : string) => {
@@ -17,4 +17,4 @@ section : string, suffix : string, language : string
 }) {
     
     // Pass data to the page via props
-    return <Level section = {section} suffix = {suffix} language = {language} solvedQuestions = {await fetchSolvedQuestions(section)} submitFunc = {solveQuestion} validateReq = {getCurrentUser}/>}
+    return <Level section = {section} suffix = {suffix} language = {language} solvedQuestions = {await fetchSolvedQuestions(section)} submitFunc = {solveQuestion} validateReq = {getCurrentUser} logout = {logout}/>}

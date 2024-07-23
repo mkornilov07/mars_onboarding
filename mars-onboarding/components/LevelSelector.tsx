@@ -10,6 +10,6 @@ export default function LevelSelector({titles, solvedQuestions, setLevelIndex} :
         <>{i}. {title}{solvedQuestions.includes(i) ? <text className = "text-lime-500">✓</text> : ""}</>
     )
     let itemList : Array<React.JSX.Element> = formattedTitles.map((title, i) =>
-    <Dropdown.Item onSelect = {()=>setLevelIndex(i)}>{title}</Dropdown.Item>)
+    <Dropdown.Item key= {i} onSelect = {()=>setLevelIndex(i)}>{title}</Dropdown.Item>)
     return <Dropdown title = "Levels">{itemList}</Dropdown>
     }
