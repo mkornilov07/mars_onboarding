@@ -91,7 +91,7 @@ export const google = new Google(
 	"http://localhost:3000/login/callback"
 );
 
-export async function logout(): Promise<ActionResult | void> {
+export async function logout(redirectAddress : string): Promise<ActionResult | void> {
 	"use server";
 	const { session } = await validateRequest();
 	if (!session) {
@@ -104,7 +104,7 @@ export async function logout(): Promise<ActionResult | void> {
 
 	const sessionCookie = lucia.createBlankSessionCookie();
 	cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
-	// return redirect("/login");
+	return redirect(redirectAddress);
 }
 
 interface ActionResult {

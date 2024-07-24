@@ -15,6 +15,9 @@ export default async function LevelWrapper({
 } : {
 section : string, suffix : string, language : string
 }) {
-    
+    async function logoutWithRedirect() {
+        'use server'
+        return logout(`/level/${section}`)
+    }
     // Pass data to the page via props
-    return <Level section = {section} suffix = {suffix} language = {language} solvedQuestions = {await fetchSolvedQuestions(section)} submitFunc = {solveQuestion} validateReq = {getCurrentUser} logout = {logout}/>}
+    return <Level section = {section} suffix = {suffix} language = {language} solvedQuestions = {await fetchSolvedQuestions(section)} submitFunc = {solveQuestion} validateReq = {getCurrentUser} logout = {logoutWithRedirect}/>}

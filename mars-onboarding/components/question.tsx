@@ -72,7 +72,7 @@ const pythonGrammar = {
 	'punctuation': /[{}[\];(),.:]/
 };
 
-export default function Question({submitFunc, starterCode, language, correctAnswers, questionId, category, validateReq} : {validateReq : any, submitFunc: (id : string, qid : number, cat : string) => Promise<void>, starterCode : string, language : string, correctAnswers: string[], questionId : number, category : string}) {
+export default function Question({submitFunc, starterCode, language, correctAnswers, questionId, category, validateReq, setSubmit} : {setSubmit : any, validateReq : any, submitFunc: (id : string, qid : number, cat : string) => Promise<void>, starterCode : string, language : string, correctAnswers: string[], questionId : number, category : string}) {
 	const [questionComplete, setQuestionComplete] = useState(false);
   	useEffect(() => Prism.highlightAll(), []);
 	useEffect(()=>{
