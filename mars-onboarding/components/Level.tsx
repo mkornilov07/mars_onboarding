@@ -19,6 +19,7 @@ export default async function Level({
 section : string, suffix : string, language : string, solvedQuestions : Array<number>, submitFunc: (id : string, qid : number, cat : string) => Promise<void>, validateReq : any, logout : any
 }) {
     const [levelIndex, setLevelIndex] = useState(0);
+    const [submitted, setSubmit] = useState(false)
     const titles = data[section].map(question => question.title)
     return (
         <div>
@@ -33,13 +34,13 @@ section : string, suffix : string, language : string, solvedQuestions : Array<nu
                 </div>
                 </div>
                 <User logout = {logout} validateReq={validateReq}/>
-                <LevelSelector solvedQuestions = {solvedQuestions} titles = {titles} setLevelIndex={setLevelIndex} ></LevelSelector>
+                <LevelSelector solvedQuestions = {solvedQuestions} section = {section} titles = {titles} setLevelIndex={setLevelIndex} setSubmit = {setSubmit} submitted = {submitted}></LevelSelector>
             </div>
             <div className = "z-0 flex-col select-none min-h-screen w-full bg-zinc-900 text-white">
                 <div className = "flex container mx-auto flex-col max-w-[900px] align-items-center space-evenly">
                     <p className = "flex text-zinc-900 bg-zinc-900">empty placeholder</p>
                     <p className = "flex text-zinc-900 bg-zinc-900">empty placeholder</p>
-                    <LevelBody levelIndex={levelIndex} language = {language} sectionData={data[section]} submitFunc={submitFunc} validateReq = {validateReq} section={section} questionIndex={levelIndex}/>
+                    <LevelBody levelIndex={levelIndex} language = {language} sectionData={data[section]} submitFunc={submitFunc} validateReq = {validateReq} section={section} questionIndex={levelIndex} setSubmit={setSubmit}/>
                 </div>
             </div>
         </div>);

@@ -84,6 +84,7 @@ export default function Question({submitFunc, starterCode, language, correctAnsw
 		}
 		if (questionComplete) {
 			a()
+			setSubmit(true);
 		}
 	}, [questionComplete])
   	function replaceBlanks(s : string, language : string) {

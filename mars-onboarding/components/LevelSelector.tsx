@@ -1,13 +1,24 @@
 'use client'
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Dropdown from "rsuite/Dropdown";
 import {promises as fs} from 'fs';
 import Link from "next/link";
 import { Button } from "@nextui-org/react";
-export default function LevelSelector({titles, solvedQuestions, setLevelIndex} : {setLevelIndex: (i : number) => void, titles: Array<React.JSX.Element>, solvedQuestions: Array<number>}) {
-    
+import { fetchSolvedQuestions } from "./LevelWrapper";
+export default function LevelSelector({titles, solvedQuestions, setLevelIndex, setSubmit, submitted, section} : {section : string, setSubmit: any, submitted: boolean, setLevelIndex: (i : number) => void, titles: Array<React.JSX.Element>, solvedQuestions: Array<number>}) {
+    const [solvedQuestionsState, setSolvedQuestionsState] = useState([] as number[])
+    useEffect(()=>{setSolvedQuestionsState(solvedQuestions)}, [solvedQuestions])
+    useEffect(()=>{
+        async function a() {
+            setSolvedQuestionsState(await fetchSolvedQuestions(section))
+        }
+        if(submitted) {
+            a()
+            setSubmit(false);
+        }
+    }, [submitted])
     let formattedTitles : Array<React.JSX.Element> = titles.map((title, i) => 
-        <>{i}. {title}{solvedQuestions.includes(i) ? <text className = "text-lime-500">✓</text> : ""}</>
+        <>{i}. {title}{solvedQuestionsState.includes(i) ? <text className = "text-lime-500">✓</text> : ""}</>
     )
     let itemList : Array<React.JSX.Element> = formattedTitles.map((title, i) =>
     <Dropdown.Item key= {i} onSelect = {()=>setLevelIndex(i)}>{title}</Dropdown.Item>)
