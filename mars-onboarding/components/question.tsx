@@ -79,12 +79,13 @@ export default function Question({submitFunc, starterCode, language, correctAnsw
 		async function a() {
 			let user = (await validateReq())
 			if (user != null) {
-				submitFunc(user.id, questionId, category)
+				await submitFunc(user.id, questionId, category)
+				setSubmit(true);
 			}
 		}
 		if (questionComplete) {
 			a()
-			setSubmit(true);
+			// setSubmit(true);
 		}
 	}, [questionComplete])
   	function replaceBlanks(s : string, language : string) {

@@ -13,14 +13,14 @@ import React from "react";
 import LevelBody from "./LevelBody";
 
 // const NoSSR = dynamic(() => import('../components/question'), { ssr: false })
-export default async function Level({
+export default function Level({
     section, suffix, language, solvedQuestions, submitFunc, validateReq, logout
 } : {
 section : string, suffix : string, language : string, solvedQuestions : Array<number>, submitFunc: (id : string, qid : number, cat : string) => Promise<void>, validateReq : any, logout : any
 }) {
     const [levelIndex, setLevelIndex] = useState(0);
-    const [submitted, setSubmit] = useState(false)
-    const titles = data[section].map(question => question.title)
+    const [submitted, setSubmit] = useState(false);
+    const titles = data[section].map(question => question.title);
     return (
         <div>
             <div className = "flex opacity-90 shadow-md shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#08f,0_0_15px_#08f] shadow-black text-white bg-black sticky justify-evenly top w-full h-30">

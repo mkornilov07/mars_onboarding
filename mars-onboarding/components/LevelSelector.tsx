@@ -6,14 +6,14 @@ import Link from "next/link";
 import { Button } from "@nextui-org/react";
 import { fetchSolvedQuestions } from "./LevelWrapper";
 export default function LevelSelector({titles, solvedQuestions, setLevelIndex, setSubmit, submitted, section} : {section : string, setSubmit: any, submitted: boolean, setLevelIndex: (i : number) => void, titles: Array<React.JSX.Element>, solvedQuestions: Array<number>}) {
-    const [solvedQuestionsState, setSolvedQuestionsState] = useState([] as number[])
-    useEffect(()=>{setSolvedQuestionsState(solvedQuestions)}, [solvedQuestions])
+    const [solvedQuestionsState, setSolvedQuestionsState] = useState([] as number[]);
+    useEffect(()=>{setSolvedQuestionsState(solvedQuestions)}, [solvedQuestions]);
     useEffect(()=>{
         async function a() {
-            setSolvedQuestionsState(await fetchSolvedQuestions(section))
+            setSolvedQuestionsState(await fetchSolvedQuestions(section));
         }
         if(submitted) {
-            a()
+            a();
             setSubmit(false);
         }
     }, [submitted])
