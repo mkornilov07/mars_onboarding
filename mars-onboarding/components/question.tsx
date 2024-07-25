@@ -75,6 +75,10 @@ const pythonGrammar = {
 export default function Question({submitFunc, starterCode, language, correctAnswers, questionId, category, validateReq, setSubmit} : {setSubmit : any, validateReq : any, submitFunc: (id : string, qid : number, cat : string) => Promise<void>, starterCode : string, language : string, correctAnswers: string[], questionId : number, category : string}) {
 	const [questionComplete, setQuestionComplete] = useState(false);
   	useEffect(() => Prism.highlightAll(), []);
+	useEffect(()=> { //on question change
+		setQuestionComplete(false)
+		setSubmit(false)
+	}, [questionId])
 	useEffect(()=>{
 		async function a() {
 			let user = (await validateReq())
@@ -151,7 +155,7 @@ export default function Question({submitFunc, starterCode, language, correctAnsw
       // fireworks({sounds:false});
       setQuestionComplete(true);
 	  const fireworks = new Fireworks(document.getElementById("q"), {explosion: 6, particles:120, friction: 0.98 });
-		fireworks.start();
+		fireworks.launch(8)
     }
   }
   const [rendered, setRendered] = useState(false);

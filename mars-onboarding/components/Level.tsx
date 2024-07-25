@@ -34,7 +34,7 @@ section : string, suffix : string, language : string, solvedQuestions : Array<nu
                 </div>
                 </div>
                 <User logout = {logout} validateReq={validateReq}/>
-                <LevelSelector solvedQuestions = {solvedQuestions} section = {section} titles = {titles} setLevelIndex={setLevelIndex} setSubmit = {setSubmit} submitted = {submitted}></LevelSelector>
+                <LevelSelector solvedQuestions = {solvedQuestions} section = {section} titles = {titles} setLevelIndex={setLevelIndex} setSubmit = {setSubmit} submitted = {submitted} questionId = {levelIndex}></LevelSelector>
             </div>
             <div className = "z-0 flex-col select-none min-h-screen w-full bg-zinc-900 text-white">
                 <div className = "flex container mx-auto flex-col max-w-[900px] align-items-center space-evenly">
@@ -61,7 +61,12 @@ const data : allQuestionData = {
         title : (<code className="bg-transparent">git reset --hard</code>),
         starterCode : "#Oh no! You accidentally messed up the codebase. What do you do? \nBLANK",
         correctAnswers : ["git reset --hard"]
-        },
+        }, 
+        {lesson:<p>dummy</p>,
+            title : <>dummy</>,
+            starterCode : "#dummy BLANK",
+            correctAnswers : ["dummy"]
+            },
     ],
     "linux" : [
         {lesson: 
