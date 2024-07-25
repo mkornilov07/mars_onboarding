@@ -71,9 +71,9 @@ const pythonGrammar = {
 	'operator': /[-+%=]=?|!=|:=|\*\*?=?|\/\/?=?|<[<=>]?|>[=>]?|[&|^~]/,
 	'punctuation': /[{}[\];(),.:]/
 };
-
-export default function Question({submitFunc, starterCode, language, correctAnswers, questionId, category, validateReq, setSubmit} : {setSubmit : any, validateReq : any, submitFunc: (id : string, qid : number, cat : string) => Promise<void>, starterCode : string, language : string, correctAnswers: string[], questionId : number, category : string}) {
+export default function Question({submitFunc, starterCode, language, correctAnswers, questionId, category, validateReq, setSubmit, checkFuncs} : {checkFuncs : Array<(arr : string[]) => Promise<boolean[]>>, setSubmit : any, validateReq : any, submitFunc: (id : string, qid : number, cat : string) => Promise<void>, starterCode : string, language : string, correctAnswers: string[], questionId : number, category : string}) {
 	const [questionComplete, setQuestionComplete] = useState(false);
+	const blankCount = starterCode.split("BLANK").length-1
   	useEffect(() => Prism.highlightAll(), []);
 	useEffect(()=> { //on question change
 		setQuestionComplete(false)
@@ -103,18 +103,18 @@ export default function Question({submitFunc, starterCode, language, correctAnsw
     let codeArr = s.split(BLANK);
     let output = "";
     let codeChunks=  [];
-    console.log(`codeArr ${codeArr}`);
+    // console.log(`codeArr ${codeArr}`);
     for(let i = 0; i < codeArr.length; i++) {
       output+= openingTag;
       codeChunks = codeArr[i].split("\n");
-      console.log(`Code chunks ${codeChunks}`);
+    //   console.log(`Code chunks ${codeChunks}`);
       for (let j = 0; j < codeChunks.length; j++) {
         
         if (language == "python") output += Prism.highlight(codeChunks[j], pythonGrammar, "python");
         else if (language == "bash") output += Prism.highlight(codeChunks[j], Prism.languages.bash, "bash");
         output += closingTag;
         if (j != codeChunks.length-1) {
-          console.log(`${j} != ${codeChunks.length}`);
+        //   console.log(`${j} != ${codeChunks.length}`);
           output += "<br>";
 		  output += openingTag;
       }
@@ -127,25 +127,35 @@ export default function Question({submitFunc, starterCode, language, correctAnsw
       output += closingTag;
     }
     output += closingTag;
-    console.log(`Replacing ${openingTag + closingTag}`)
+    // console.log(`Replacing ${openingTag + closingTag}`)
     output = output.replaceAll(openingTag + closingTag, "");
     output = output.replaceAll(openingTag + " " + closingTag, "");
-    console.log(`Output ${output}`)
+    // console.log(`Output ${output}`)
     return output;
   }
   function onSubmit() {
     let allCorrect = true;
-    for (let i = 0; i < correctAnswers.length; i++) {
+	
+	let responses : string[]= [];
+	for (let i = 0; i < blankCount; i++) {
+		let box = document.getElementById(`blank${i}`);
+		let response = box?.value;
+		responses.push(response)}
+		checkFuncs[questionId](responses).then((compareArray) => {
+	// console.log("compareArray:")
+	// console.log(compareArray)
+    for (let i = 0; i < blankCount; i++) {
       let box = document.getElementById(`blank${i}`);
       let response = box?.value;
       // console.log(`You answered ${response}`);
       // console.log(`Correct answer is ${correctAnswers[i]}`)
-      if (response == correctAnswers[i]) {
-        console.log("Good");
+      if (compareArray[i].value) {
+        // console.log("Good");
         box?.animate([{"color": "green"}, {"color": "white"}], 2000);
       }
       else {
-        console.log("Bad");
+		// console.log(`Value ${compareArray[i].value}`)
+        // console.log("Bad");
         allCorrect = false;
         box?.animate([{"color": "red"}, {"color": "white"}], 2000);
       }
@@ -157,6 +167,8 @@ export default function Question({submitFunc, starterCode, language, correctAnsw
 	  const fireworks = new Fireworks(document.getElementById("q"), {explosion: 6, particles:120, friction: 0.98 });
 		fireworks.launch(8)
     }
+		})
+	
   }
   const [rendered, setRendered] = useState(false);
   useEffect(()=>setRendered(true));
