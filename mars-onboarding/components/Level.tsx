@@ -50,7 +50,7 @@ data: allQuestionData, section : string, suffix : string, language : string, sol
 
 export interface questionData {
     correctAnswers?: string[],
-    checkFunction? : (answers : string[]) => boolean[],
+    checkFunction? : (answers : string[]) => Promise<any>,
     starterCode: string,
     lesson : React.JSX.Element,
     title : React.JSX.Element

@@ -10,6 +10,7 @@ import { Fireworks } from 'fireworks-js'
 import 'prismjs/components/prism-bash.js';
 import 'prism-themes/themes/prism-xonokai.css';
 import Link from 'next/link';
+import { checkAnswers } from './LevelWrapper';
 const pythonGrammar = {
 	'comment': {
 		pattern: /(^|[^\\])#.*/,
@@ -71,7 +72,7 @@ const pythonGrammar = {
 	'operator': /[-+%=]=?|!=|:=|\*\*?=?|\/\/?=?|<[<=>]?|>[=>]?|[&|^~]/,
 	'punctuation': /[{}[\];(),.:]/
 };
-export default function Question({submitFunc, starterCode, language, correctAnswers, questionId, category, validateReq, setSubmit, checkFuncs} : {checkFuncs : Array<(arr : string[]) => Promise<boolean[]>>, setSubmit : any, validateReq : any, submitFunc: (id : string, qid : number, cat : string) => Promise<void>, starterCode : string, language : string, correctAnswers: string[], questionId : number, category : string}) {
+export default function Question({submitFunc, starterCode, language, correctAnswers, questionId, category, validateReq, setSubmit, checkFuncs} : {checkFuncs : any, setSubmit : any, validateReq : any, submitFunc: (id : string, qid : number, cat : string) => Promise<void>, starterCode : string, language : string, correctAnswers: string[], questionId : number, category : string}) {
 	const [questionComplete, setQuestionComplete] = useState(false);
 	const blankCount = starterCode.split("BLANK").length-1
   	useEffect(() => Prism.highlightAll(), []);
@@ -141,15 +142,15 @@ export default function Question({submitFunc, starterCode, language, correctAnsw
 		let box = document.getElementById(`blank${i}`);
 		let response = box?.value;
 		responses.push(response)}
-		checkFuncs[questionId](responses).then((compareArray) => {
+		checkAnswers(responses, category, questionId).then((compareArray) => {
 	// console.log("compareArray:")
-	// console.log(compareArray)
+	console.log(`compareArray ${compareArray} : ${typeof compareArray[0]} : ${JSON.stringify(compareArray[0])}`)
     for (let i = 0; i < blankCount; i++) {
       let box = document.getElementById(`blank${i}`);
       let response = box?.value;
       // console.log(`You answered ${response}`);
       // console.log(`Correct answer is ${correctAnswers[i]}`)
-      if (compareArray[i].value) {
+      if (compareArray[i] == true) {
         // console.log("Good");
         box?.animate([{"color": "green"}, {"color": "white"}], 2000);
       }
