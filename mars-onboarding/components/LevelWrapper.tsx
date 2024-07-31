@@ -22,7 +22,8 @@ section : string, suffix : string, language : string
 }) {
     async function logoutWithRedirect() {
         'use server'
-        return logout(`/level/${section}`)
+        return logout('/level')
+        //return logout(`/level/${section}`)
     }
     // Pass data to the page via props
     
@@ -50,6 +51,20 @@ const data : allQuestionData = {
             },
     ],
     "linux" : [
+        {lesson: 
+            (<><p>We execute commands in the Linux <b>terminal</b>, which is a way to interface with the Linux <b>shell</b>, the lowest part of the operating system you can access</p>
+            <p>In the shell, you can manipulate files, packages, devices, and more with just commands.</p>
+            <p>The first command you will learn is <code>echo</code>, it takes one <b>argument</b> and prints it back in the terminal.</p>
+            <p>Example: Executing <code>echo Hello</code> will print <code>Hello</code> to the shell. The command and arguments are separated by spaces.</p>
+            <p>What if we want to include a space in our argument, like if we want to print <code>Hello world</code>? We just wrap the argument in quotes (<code>echo "Hello world"</code>).</p>
+            <p>For this lesson, imagine you just opened the terminal and need to print <code>Hello, MARS!</code></p>
+            </>),
+        title: <>Commands</>,
+        starterCode: 
+`$ BLANK
+`,
+        correctAnswers: ['echo "Hello, MARS!"']
+        },
         {lesson: 
             (<><p>Files on the disk are organized in a tree-like structure in most operating systems, including Linux. A <b>path</b> is
              the address of the file in that tree.</p>
