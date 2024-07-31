@@ -1,7 +1,6 @@
 'use server'
 import Level, { allQuestionData, questionData } from "./Level";
 import { validateRequest, getSolvedQuestions, solveQuestion, getCurrentUser, logout} from "@/lib/lucia";
-import { GetServerSideProps } from "next";
 import { cache, use } from "react";
 export const fetchSolvedQuestions = cache(async (section : string) => {
     let solvedQuestions;
@@ -67,15 +66,21 @@ const data : allQuestionData = {
             <p>We can also use a <b>relative path</b>. If we're already in <code>user/Mikhail/Documents</code>, we don't want to retype all that
             just to get to <code>hw2.pdf</code>. Instead, we just write the part that's missing (no <code>/</code> indicates a relative path):</p>
             <p><code>cd school/"CSO1 Homework"</code></p>
+            <p>We can also use <code>.</code> (current directory) or <code>..</code> (parent directory) in the path. If we are in 
+            <code>/user/Mikhail/Documents/school/"CSO1 Homework"</code> and we wanna navigate to 
+            <code>/user/Mikhail/Documents/secretplans</code>, we would run</p>
+            <p><code>cd ../../secretplans</code></p>
             </>),
-        title: <>Navigation 1</>,
+        title: <>Navigation</>,
         starterCode: 
-`#We need to get to /u/MARS/code/mars-ros/src/nodes/odometry
+`#We need to get to /u/MARS/code/mars-ros/nodes/odometry
 $ pwd
 /u/MARS/code
 $ BLANK
+#Oops, I meant /u/MARS/code/hero-serial/odom
+$ BLANK
 `,
-        correctAnswers: ['cd mars-ros/src/nodes/odometry']
+        correctAnswers: ['cd mars-ros/nodes/odometry', 'cd ../../../hero-serial/odom']
         },
         
         {lesson: 
@@ -126,7 +131,7 @@ def main():
 if __name__ == "__main__":
     main()
 `,
-        title: (<p>Subscribers and Publishers</p>),
+        title: <>Subscribers and Publishers</>,
         correctAnswers: ['pub.publish(String("yes"))', 'pub.publish(String("no"))', '"ir_readings", Int64, callback']
     },]
 }

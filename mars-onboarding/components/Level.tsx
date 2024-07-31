@@ -11,6 +11,7 @@ import User from "./User";
 import LevelSelector from "./LevelSelector";
 import React from "react";
 import LevelBody from "./LevelBody";
+import { Numans } from "next/font/google";
 
 // const NoSSR = dynamic(() => import('../components/question'), { ssr: false })
 export default function Level({
@@ -18,8 +19,10 @@ export default function Level({
 } : {
 data: allQuestionData, section : string, suffix : string, language : string, solvedQuestions : Array<number>, submitFunc: (id : string, qid : number, cat : string) => Promise<void>, validateReq : any, logout : any
 }) {
+    const numQuestions = data[section].length
     console.log(data)
     const [levelIndex, setLevelIndex] = useState(0);
+    const goToNextLevel = ()=> {setLevelIndex(levelIndex + 1)}
     const [submitted, setSubmit] = useState(false);
     const titles = data[section].map(question => question.title);
     const checkFuncs = data[section].map(question => question.checkFunction);
@@ -29,7 +32,7 @@ data: allQuestionData, section : string, suffix : string, language : string, sol
                 <Link href = "/level/" className = "text-white opacity-60 hover:opacity-100 m-5 self-center content-start select-none text-5xl hover:text-red-700">⬅</Link>
                 <div className = "flex-row m-6">
                 <h1 className = "m-10 select-none opacity-90 font-bold font-mono text-4xl place-self-center">
-                    {data[section][levelIndex].title} {"("}{suffix} {levelIndex}{")"}
+                    {data[section][levelIndex].title} ({suffix} {levelIndex+1})
                 </h1>
                 <div className = "m-10 place-content-center">
                     <Popup contents = {data[section][levelIndex].lesson} title = {data[section][levelIndex].title}></Popup>
@@ -39,10 +42,12 @@ data: allQuestionData, section : string, suffix : string, language : string, sol
                 <LevelSelector solvedQuestions = {solvedQuestions} section = {section} titles = {titles} setLevelIndex={setLevelIndex} setSubmit = {setSubmit} submitted = {submitted} questionId = {levelIndex}></LevelSelector>
             </div>
             <div className = "z-0 flex-col select-none min-h-screen w-full bg-zinc-900 text-white">
+                
                 <div className = "flex container mx-auto flex-col max-w-[900px] align-items-center space-evenly">
+                
                     <p className = "flex text-zinc-900 bg-zinc-900">empty placeholder</p>
                     <p className = "flex text-zinc-900 bg-zinc-900">empty placeholder</p>
-                    <LevelBody levelIndex={levelIndex} language = {language} sectionData={data[section]} submitFunc={submitFunc} validateReq = {validateReq} section={section} questionIndex={levelIndex} setSubmit={setSubmit} checkFuncs = {checkFuncs}/>
+                    <LevelBody numQuestions= {numQuestions} goToNextLevel = {goToNextLevel} levelIndex={levelIndex} language = {language} sectionData={data[section]} submitFunc={submitFunc} validateReq = {validateReq} section={section} questionIndex={levelIndex} setSubmit={setSubmit} checkFuncs = {checkFuncs}/>
                 </div>
             </div>
         </div>);

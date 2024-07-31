@@ -11,68 +11,8 @@ import 'prismjs/components/prism-bash.js';
 import 'prism-themes/themes/prism-xonokai.css';
 import Link from 'next/link';
 import { checkAnswers } from './LevelWrapper';
-const pythonGrammar = {
-	'comment': {
-		pattern: /(^|[^\\])#.*/,
-		lookbehind: true,
-		greedy: true
-	},
-	'string-interpolation': {
-		pattern: /(?:f|fr|rf)(?:("""|''')[\s\S]*?\1|("|')(?:\\.|(?!\2)[^\\\r\n])*\2)/i,
-		greedy: true,
-		inside: {
-			'interpolation': {
-				// "{" <expression> <optional "!s", "!r", or "!a"> <optional ":" format specifier> "}"
-				pattern: /((?:^|[^{])(?:\{\{)*)\{(?!\{)(?:[^{}]|\{(?!\{)(?:[^{}]|\{(?!\{)(?:[^{}])+\})+\})+\}/,
-				lookbehind: true,
-				inside: {
-					'format-spec': {
-						pattern: /(:)[^:(){}]+(?=\}$)/,
-						lookbehind: true
-					},
-					'conversion-option': {
-						pattern: /![sra](?=[:}]$)/,
-						alias: 'punctuation'
-					},
-					rest: null
-				}
-			},
-			'string': /[\s\S]+/
-		}
-	},
-	'triple-quoted-string': {
-		pattern: /(?:[rub]|br|rb)?("""|''')[\s\S]*?\1/i,
-		greedy: true,
-		alias: 'string'
-	},
-	'string': {
-		pattern: /(?:[rub]|br|rb)?("|')(?:\\.|(?!\1)[^\\\r\n])*\1/i,
-		greedy: true
-	},
-	'function': {
-		pattern: /((?:^|\s)def[ \t]+)[a-zA-Z_]\w*(?=\s*\()/g,
-		lookbehind: true
-	},
-	'class-name': {
-		pattern: /(\bclass\s+)\w+/i,
-		lookbehind: true
-	},
-	'decorator': {
-		pattern: /(^[\t ]*)@\w+(?:\.\w+)*/m,
-		lookbehind: true,
-		alias: ['annotation', 'punctuation'],
-		inside: {
-			'punctuation': /\./
-		}
-	},
-	'keyword': /\b(?:_(?=\s*:)|and|as|assert|async|await|break|case|class|continue|def|del|elif|else|except|exec|finally|for|from|global|if|import|in|is|lambda|match|nonlocal|not|or|pass|print|raise|return|try|while|with|yield)\b/,
-	'builtin': /\b(?:__import__|abs|all|any|apply|ascii|basestring|bin|bool|buffer|bytearray|bytes|callable|chr|classmethod|cmp|coerce|compile|complex|delattr|dict|dir|divmod|enumerate|eval|execfile|file|filter|float|format|frozenset|getattr|globals|hasattr|hash|help|hex|id|input|int|intern|isinstance|issubclass|iter|len|list|locals|long|map|max|memoryview|min|next|object|oct|open|ord|pow|property|range|raw_input|reduce|reload|repr|reversed|round|set|setattr|slice|sorted|staticmethod|str|sum|super|tuple|type|unichr|unicode|vars|xrange|zip)\b/,
-	'boolean': /\b(?:False|None|True)\b/,
-	'number': /\b0(?:b(?:_?[01])+|o(?:_?[0-7])+|x(?:_?[a-f0-9])+)\b|(?:\b\d+(?:_\d+)*(?:\.(?:\d+(?:_\d+)*)?)?|\B\.\d+(?:_\d+)*)(?:e[+-]?\d+(?:_\d+)*)?j?(?!\w)/i,
-	'operator': /[-+%=]=?|!=|:=|\*\*?=?|\/\/?=?|<[<=>]?|>[=>]?|[&|^~]/,
-	'punctuation': /[{}[\];(),.:]/
-};
-export default function Question({submitFunc, starterCode, language, correctAnswers, questionId, category, validateReq, setSubmit, checkFuncs} : {checkFuncs : any, setSubmit : any, validateReq : any, submitFunc: (id : string, qid : number, cat : string) => Promise<void>, starterCode : string, language : string, correctAnswers: string[], questionId : number, category : string}) {
+
+export default function Question({submitFunc, starterCode, language, questionId, numQuestions, category, validateReq, setSubmit, goToNextLevel} : {numQuestions: number, goToNextLevel : any, setSubmit : any, validateReq : any, submitFunc: (id : string, qid : number, cat : string) => Promise<void>, starterCode : string, language : string,  questionId : number, category : string}) {
 	const [questionComplete, setQuestionComplete] = useState(false);
 	const blankCount = starterCode.split("BLANK").length-1
   	useEffect(() => Prism.highlightAll(), []);
@@ -181,9 +121,11 @@ export default function Question({submitFunc, starterCode, language, correctAnsw
         {rendered && codeElement}
 		</div>
         <br/>
-        {questionComplete ? <Link href = "/level" ><button className ="bg-green-800 active:shadow-[0_0_5px_#666] opacity-80 cursor-pointer border-green-600 hover:shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#08f,0_0_15px_#08f,0_0_30px_#08f] hover:shadow-green-600 hover:bg-green-800 hover:opacity-80 text-white font-bold py-2 px-4 rounded" onClick = {onSubmit}>
+        {questionComplete ? ((questionId != numQuestions - 1)?
+			<button className ="bg-green-800 active:shadow-[0_0_5px_#666] opacity-80 cursor-pointer border-green-600 hover:shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#08f,0_0_15px_#08f,0_0_30px_#08f] hover:shadow-green-600 hover:bg-green-800 hover:opacity-80 text-white font-bold py-2 px-4 rounded" onClick = {goToNextLevel}>
           Next Level
-        </button></Link> : <button className ="bg-red-800 active:shadow-[0_0_5px_#666] opacity-80 cursor-pointer border-red-600 hover:shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#08f,0_0_15px_#08f,0_0_30px_#08f] hover:shadow-red-600 hover:bg-red-800 hover:opacity-80 text-white font-bold py-2 px-4 rounded" onClick = {onSubmit}>
+        </button> : <Link href = "/level"><button className="bg-blue-800 active:shadow-[0_0_5px_#666] opacity-80 cursor-pointer border-green-600 hover:shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#08f,0_0_15px_#08f,0_0_30px_#08f] hover:shadow-blue-600 hover:bg-blue-800 hover:opacity-80 text-white font-bold py-2 px-4 rounded">Level Select</button></Link>)
+		 : <button className ="bg-red-800 active:shadow-[0_0_5px_#666] opacity-80 cursor-pointer border-red-600 hover:shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#08f,0_0_15px_#08f,0_0_30px_#08f] hover:shadow-red-600 hover:bg-red-800 hover:opacity-80 text-white font-bold py-2 px-4 rounded" onClick = {onSubmit}>
           Submit
         </button> }
 		<div><canvas id = "q" className="pointer-events-none relative w-[900px] h-[1000px] -top-[400px]"></canvas></div>
@@ -193,6 +135,68 @@ export default function Question({submitFunc, starterCode, language, correctAnsw
 
 
 
+
+const pythonGrammar = {
+	'comment': {
+		pattern: /(^|[^\\])#.*/,
+		lookbehind: true,
+		greedy: true
+	},
+	'string-interpolation': {
+		pattern: /(?:f|fr|rf)(?:("""|''')[\s\S]*?\1|("|')(?:\\.|(?!\2)[^\\\r\n])*\2)/i,
+		greedy: true,
+		inside: {
+			'interpolation': {
+				// "{" <expression> <optional "!s", "!r", or "!a"> <optional ":" format specifier> "}"
+				pattern: /((?:^|[^{])(?:\{\{)*)\{(?!\{)(?:[^{}]|\{(?!\{)(?:[^{}]|\{(?!\{)(?:[^{}])+\})+\})+\}/,
+				lookbehind: true,
+				inside: {
+					'format-spec': {
+						pattern: /(:)[^:(){}]+(?=\}$)/,
+						lookbehind: true
+					},
+					'conversion-option': {
+						pattern: /![sra](?=[:}]$)/,
+						alias: 'punctuation'
+					},
+					rest: null
+				}
+			},
+			'string': /[\s\S]+/
+		}
+	},
+	'triple-quoted-string': {
+		pattern: /(?:[rub]|br|rb)?("""|''')[\s\S]*?\1/i,
+		greedy: true,
+		alias: 'string'
+	},
+	'string': {
+		pattern: /(?:[rub]|br|rb)?("|')(?:\\.|(?!\1)[^\\\r\n])*\1/i,
+		greedy: true
+	},
+	'function': {
+		pattern: /((?:^|\s)def[ \t]+)[a-zA-Z_]\w*(?=\s*\()/g,
+		lookbehind: true
+	},
+	'class-name': {
+		pattern: /(\bclass\s+)\w+/i,
+		lookbehind: true
+	},
+	'decorator': {
+		pattern: /(^[\t ]*)@\w+(?:\.\w+)*/m,
+		lookbehind: true,
+		alias: ['annotation', 'punctuation'],
+		inside: {
+			'punctuation': /\./
+		}
+	},
+	'keyword': /\b(?:_(?=\s*:)|and|as|assert|async|await|break|case|class|continue|def|del|elif|else|except|exec|finally|for|from|global|if|import|in|is|lambda|match|nonlocal|not|or|pass|print|raise|return|try|while|with|yield)\b/,
+	'builtin': /\b(?:__import__|abs|all|any|apply|ascii|basestring|bin|bool|buffer|bytearray|bytes|callable|chr|classmethod|cmp|coerce|compile|complex|delattr|dict|dir|divmod|enumerate|eval|execfile|file|filter|float|format|frozenset|getattr|globals|hasattr|hash|help|hex|id|input|int|intern|isinstance|issubclass|iter|len|list|locals|long|map|max|memoryview|min|next|object|oct|open|ord|pow|property|range|raw_input|reduce|reload|repr|reversed|round|set|setattr|slice|sorted|staticmethod|str|sum|super|tuple|type|unichr|unicode|vars|xrange|zip)\b/,
+	'boolean': /\b(?:False|None|True)\b/,
+	'number': /\b0(?:b(?:_?[01])+|o(?:_?[0-7])+|x(?:_?[a-f0-9])+)\b|(?:\b\d+(?:_\d+)*(?:\.(?:\d+(?:_\d+)*)?)?|\B\.\d+(?:_\d+)*)(?:e[+-]?\d+(?:_\d+)*)?j?(?!\w)/i,
+	'operator': /[-+%=]=?|!=|:=|\*\*?=?|\/\/?=?|<[<=>]?|>[=>]?|[&|^~]/,
+	'punctuation': /[{}[\];(),.:]/
+};
 
 (function (Prism) {
 	// $ set | grep '^[A-Z][^[:space:]]*=' | cut -d= -f1 | tr '\n' '|'

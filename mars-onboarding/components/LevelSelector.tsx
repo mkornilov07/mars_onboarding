@@ -18,7 +18,7 @@ export default function LevelSelector({titles, solvedQuestions, setLevelIndex, s
         }
     }, [submitted])
     let formattedTitles : Array<React.JSX.Element> = titles.map((title, i) => 
-        <><text className={(i == questionId) ? "italic text-red-600" : ""}>{i}. {title}{solvedQuestionsState.includes(i) ? <text className = "text-lime-500">✓</text> : ""}</text></>
+        <><text className={(i == questionId) ? "italic text-red-600" : ""}>{i+1}. {title}{solvedQuestionsState.includes(i) ? <text className = "text-lime-500">✓</text> : ""}</text></>
     )
     let itemList : Array<React.JSX.Element> = formattedTitles.map((title, i) =>
     <Dropdown.Item key= {i} onSelect = {()=>setLevelIndex(i)}>{title}</Dropdown.Item>)
