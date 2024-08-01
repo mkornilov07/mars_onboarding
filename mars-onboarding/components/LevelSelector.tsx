@@ -25,9 +25,9 @@ export default function LevelSelector({titles, solvedQuestions, setLevelIndex, s
     )
     let itemList : Array<React.JSX.Element> = formattedTitles.map((title, i) =>
     <Dropdown.Item className = "text-lg p-9" key= {i} onSelect = {()=>setLevelIndex(i)}>{title}</Dropdown.Item>)
-    return <Dropdown style={{padding: 0, margin: 0}} title = 
-            {<h1 className = "m-10 select-none opacity-90 font-bold font-mono text-4xl place-self-center">
-                {titles[questionId]} ({suffix} {questionId+1})
+    return <Dropdown style={{padding: 0, margin: 0}} renderToggle = { (props, ref) =>
+            <h1 className = "m-10 select-none opacity-90 font-bold font-mono text-4xl place-self-center" {...props} ref = {ref}>
+                {titles[questionId]} ({suffix} {questionId+1}) ▼
             </h1>}
             className = "rs-theme-dark">{itemList}
         </Dropdown>
