@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Button } from "@nextui-org/react";
 import { ReactDOM } from "react";
 import { fetchSolvedQuestions } from "./LevelWrapper";
-import "rsuite/dist/rsuite.css";
+import "rsuite/Dropdown/styles/index.css";
 
 export default function LevelSelector({titles, solvedQuestions, setLevelIndex, setSubmit, submitted, section, questionId, suffix} : {questionId : number, section : string, setSubmit: any, submitted: boolean, setLevelIndex: (i : number) => void, titles: Array<React.JSX.Element>, solvedQuestions: Array<number>, suffix: string}) {
     const [solvedQuestionsState, setSolvedQuestionsState] = useState([] as number[]);
@@ -26,9 +26,9 @@ export default function LevelSelector({titles, solvedQuestions, setLevelIndex, s
     let itemList : Array<React.JSX.Element> = formattedTitles.map((title, i) =>
     <Dropdown.Item className = "text-lg p-9" key= {i} onSelect = {()=>setLevelIndex(i)}>{title}</Dropdown.Item>)
     return <Dropdown style={{padding: 0, margin: 0}} renderToggle = { (props, ref) =>
-            <h1 className = "m-10 select-none opacity-90 font-bold font-mono text-4xl place-self-center" {...props} ref = {ref}>
+            <button className = "p-0 m-0"><h1 className = "select-none opacity-90 font-bold font-mono text-4xl place-self-center" {...props} ref = {ref}>
                 {titles[questionId]} ({suffix} {questionId+1}) ▼
-            </h1>}
-            className = "rs-theme-dark">{itemList}
+            </h1></button>}
+            className = "rs-theme-dark w-2/3" trigger="click">{itemList}
         </Dropdown>
     }

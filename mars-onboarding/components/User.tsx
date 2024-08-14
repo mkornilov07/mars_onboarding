@@ -15,7 +15,7 @@ export default function User({logout, validateReq} : {logout: any, validateReq: 
     
 	if(picture == "") {
 		return (
-			<div className="flex justify-center content-center m-10">
+			<div className="flex justify-center content-center p-4">
 				<Link href = "/login" className="rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-red-600 text-red-600 text-white">
 					<span className="absolute w-64 h-0 transition-all duration-300 origin-center rotate-45 -translate-x-20 bg-red-600 top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease">
 					</span>
@@ -27,12 +27,15 @@ export default function User({logout, validateReq} : {logout: any, validateReq: 
 		);
 	}
 	else {
+		// return <img src = {picture}></img>
 		return (
-			<div className="flex-col justify-center content-center m-10 align-center">
-				<img src = {picture} className="justify-center"></img>
-				<form action={logout} className = "justify-self-center justify-center text-center content-center">
-					<button className = "justify-self-center content-center text-center text-gray-600 hover:text-blue-600 hover:underline">Sign out</button>
-				</form>
+			<div className="flex-col justify-center content-center p-4 align-center">
+				<div className="object-contain">
+					<img src = {picture} className="justify-center align-center"></img>
+					<form action={logout} className = "justify-self-center justify-center text-center content-center">
+						<button className = "justify-self-center content-center text-center text-gray-600 hover:text-blue-600 hover:underline">Sign out</button>
+					</form>
+				</div>
 			</div>
 		);
 	}
