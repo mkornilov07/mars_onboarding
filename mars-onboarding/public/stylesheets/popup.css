@@ -5,10 +5,14 @@ code {
     margin-left: 2px;
     margin-right: 2px;
     border-radius:3px;
-    font-weight: 900;
+    font-weight: 700;
 }
 
 b {
     color: rgb(228, 118, 28);
-    font-weight:900;
+    font-weight: 700;
+}
+
+a {
+    color:rgb(143, 181, 255)
 }

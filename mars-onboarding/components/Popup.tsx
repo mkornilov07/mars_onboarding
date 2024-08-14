@@ -10,7 +10,7 @@ export default function Popup({contents, title} : {contents: React.JSX.Element, 
 
     return (
     <>
-        <Button onPress={onOpen} className="cursor-help" color="primary"><img src = "/icons/book.png" width="25px"></img></Button>
+        <Button onPress={onOpen} className="cursor-help self-center" color="primary"><img src = "/icons/book.png" width="25px"></img></Button>
         <Modal 
             backdrop="opaque" 
             isOpen={isOpen} 
@@ -35,7 +35,7 @@ export default function Popup({contents, title} : {contents: React.JSX.Element, 
         <ModalContent>
             {(onClose) => (
             <>
-            <div className = "animate__animated animate__lightSpeedInRight scale-75 transform right-1 fixed"><img src = "/icons/rover.png"></img></div>
+            <div className = "animate__animated animate__lightSpeedInRight scale-75 transform right-1 fixed pointer-events-none"><img src = "/icons/rover.png"></img></div>
                 <ModalHeader className="flex flex-col gap-1">{title}</ModalHeader>
                 <ModalBody>{contents}
                 </ModalBody>
