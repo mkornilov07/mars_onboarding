@@ -90,7 +90,7 @@ $ BLANK`,
         },
 
         {
-            title: <>Remote repository</>,
+            title: <>Remote Repository</>,
             lesson: <><p>You can interact with the <b>remote repo</b> (the shared repo) in two 
             ways: <code>git push</code> and <code>git pull</code> (no arguments). When you push, you are uploading your
             changes to the remote repo. When you pull, you sync your local repo up to date with the remote repo,
@@ -113,19 +113,12 @@ $ BLANK
         },
 
         {
-            title:<>In case of emergency</>,
+            title:<>In Case of Emergency</>,
             lesson : <><p>Detached HEAD exception, deleting all the code on accident, lots of scary errors.
-                Sometimes things just go really wrong. To go back to the last commit, use <code className="bg-transparent">git reset --hard</code>.</p></>,
+                Sometimes things just go really wrong. To go back to the last commit, use <code>git reset --hard</code>.</p></>,
             starterCode : "#Oh no! You accidentally messed up the codebase. What do you do? \nBLANK",
             correctAnswers : ["git reset --hard"]
         },
-
-        // {
-        //     lesson:<p>dummy</p>,
-        //     title : <>dummy</>,
-        //     starterCode : "#dummy BLANK",
-        //     correctAnswers : ["dummy"]
-        // },
     ],
     "linux" : [
         {
@@ -225,13 +218,14 @@ $ BLANK
                 <li><code>cat FILENAME</code> - quickly see the contents of a file</li>
                 <p>Man pages:</p>
                 <li><a target = "_blank" href = "https://man7.org/linux/man-pages/man1/mkdir.1.html"><u>mkdir</u></a></li>
-                <li><a target="_blank" href = "https://man7.org/linux/man-pages/man1/touch.1.html"><u>touch</u></a></li>
+                <li><a target = "_blank" href = "https://man7.org/linux/man-pages/man1/touch.1.html"><u>touch</u></a></li>
                 <li><a target = "_blank" href = "https://man7.org/linux/man-pages/man1/rm.1.html"><u>rm</u></a></li>
                 <li><a target = "_blank" href = "https://linux.die.net/man/1/mv"><u>mv</u></a></li>
+                <li><a target = "_blank" href = "https://man7.org/linux/man-pages/man1/cp.1.html"><u>cp</u></a></li>
                 </>),
             
             starterCode: 
-`#Make a directory called code.
+`#Make a directory called code
 $ BLANK
 #Go into that directory and make a file called file1
 $ BLANK
@@ -271,6 +265,42 @@ $ ./start1.sh
 $ BLANK`,
             correctAnswers: ['echo nvidia >> /etc/hosts', 'hostname -I | start2.sh']
         },
+        {
+            title: <>Reading Files</>,
+            lesson:<></>,
+            starterCode:'',
+            correctAnswers:[]
+        },
+        {
+            title:<>Shell Scripting</>,
+            lesson: <><p>Very often, we want to automate some processes on the machine. We had to do this last year when we found out
+                the robot startup process was too long. To automate these processes, we write <b>shell scripts</b>, which are
+                shell commands in a file, with a couple nuances.</p>
+                <p>To make a shell script, we just make a file with a .bash or .sh extension. Then we change the permissions using
+                <code>chmod +x FILENAME.bash</code> to make the file executable. After that we can run it
+                as a program using <code>./FILENAME.bash</code> (The <code>./</code> just indicates we're referring to a file 
+                in the current directory. We could replace it with the file path.)
+                </p>
+                <p>A shell script is a line-by-line sequence of commands, except there are a couple other things you can do.</p>
+                <p>Variable assignment: We can assign a variable using <code>=</code>.</p>
+                <p><code>x=5</code> sets a new variable called <code>x</code> to 5.</p>
+                <p>Important: There is NO space before or after the = operator. If you add a space, you will get an error.
+                    Remember, spaces are only for arguments and options.
+                </p>
+                <p>To reference <code>x</code> or any other variable, we use the dollar sign ($).</p>
+                <p><code>echo $x</code> prints 5. This time, we use a space because the <code>$x</code> is an argument.</p>
+                <p>We can set a variable to the output of a command using backticks (``).</p>
+                <p><code>filesInWorkingDir=`ls`</code> runs <code>ls</code> which lists the files in the working
+                directory, takes that string and assigns a variable called <code>filesInWorkingDir</code> to it.</p>
+                <p>Comments are done with hashtags (#), just like Python.</p>
+                <p>If statements also exist, but the syntax looks different. 
+                    Check <a target="_blank" href="https://www.geeksforgeeks.org/bash-scripting-introduction-to-bash-and-bash-scripting/#variables"
+                    ><u>GeeksForGeeks</u></a> for more information.
+                </p>
+                </>,
+            starterCode:'',
+            correctAnswers:[]
+        }
         
     ],
     "ros": [
