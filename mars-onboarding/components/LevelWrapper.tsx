@@ -216,12 +216,16 @@ $ BLANK
                 <li><code>cp SOURCE... DESTINATION</code> (copy) - make a copy of the SOURCE file and put it in DESTINATION</li>
                 <li><code>nano FILENAME</code> - opens a text editor to edit the file</li>
                 <li><code>cat FILENAME</code> - quickly see the contents of a file</li>
+                <li><code>grep STRING FILE</code> - finds all instances of the STRING in the FILE. Very useful command,
+                especially combined with redirection (next level). The STRING can actually be a regex pattern if
+                you're familiar with those.</li>
                 <p>Man pages:</p>
                 <li><a target = "_blank" href = "https://man7.org/linux/man-pages/man1/mkdir.1.html"><u>mkdir</u></a></li>
                 <li><a target = "_blank" href = "https://man7.org/linux/man-pages/man1/touch.1.html"><u>touch</u></a></li>
                 <li><a target = "_blank" href = "https://man7.org/linux/man-pages/man1/rm.1.html"><u>rm</u></a></li>
                 <li><a target = "_blank" href = "https://linux.die.net/man/1/mv"><u>mv</u></a></li>
                 <li><a target = "_blank" href = "https://man7.org/linux/man-pages/man1/cp.1.html"><u>cp</u></a></li>
+                <li><a target = "_blank" href="https://man7.org/linux/man-pages/man1/grep.1.html"><u>grep</u></a></li>
                 </>),
             
             starterCode: 
@@ -266,12 +270,6 @@ $ BLANK`,
             correctAnswers: ['echo nvidia >> /etc/hosts', 'hostname -I | start2.sh']
         },
         {
-            title: <>Reading Files</>,
-            lesson:<></>,
-            starterCode:'',
-            correctAnswers:[]
-        },
-        {
             title:<>Shell Scripting</>,
             lesson: <><p>Very often, we want to automate some processes on the machine. We had to do this last year when we found out
                 the robot startup process was too long. To automate these processes, we write <b>shell scripts</b>, which are
@@ -289,17 +287,29 @@ $ BLANK`,
                 </p>
                 <p>To reference <code>x</code> or any other variable, we use the dollar sign ($).</p>
                 <p><code>echo $x</code> prints 5. This time, we use a space because the <code>$x</code> is an argument.</p>
+                <p>We can even reference variables in strings: <code>echo "The value of x is $x"</code> correctly
+                prints <code>The value of x is 5</code>.</p>
                 <p>We can set a variable to the output of a command using backticks (``).</p>
                 <p><code>filesInWorkingDir=`ls`</code> runs <code>ls</code> which lists the files in the working
                 directory, takes that string and assigns a variable called <code>filesInWorkingDir</code> to it.</p>
                 <p>Comments are done with hashtags (#), just like Python.</p>
-                <p>If statements also exist, but the syntax looks different. 
+                <p>If statements: they also exist, but the syntax looks different. 
                     Check <a target="_blank" href="https://www.geeksforgeeks.org/bash-scripting-introduction-to-bash-and-bash-scripting/#variables"
                     ><u>GeeksForGeeks</u></a> for more information.
                 </p>
                 </>,
-            starterCode:'',
-            correctAnswers:[]
+            starterCode:`#In this shell script, we're going to run a ROS script and report the number of errors
+#Errors are found in the log file navigation.log and they are labeled "Error"
+#If there are no errors, print "No errors found"
+#If there are N errors, print "N errors found"
+rosrun navigation.py
+
+N=BLANK
+if [ $N -gt BLANK ];then
+    BLANK
+else
+    BLANK`,
+            correctAnswers:["`grep -c Error navigation.log`", "0",  "echo '$N errors found'", "echo 'No errors found'"]
         }
         
     ],
