@@ -42,17 +42,90 @@ section : string, suffix : string, language : string
 const data : allQuestionData = {
     "git" : [
         {
-            lesson:<p>You'll need this</p>,
-            title : (<code className="bg-transparent">git reset --hard</code>),
+            title: <>Cloning</>,
+            lesson: <><p>A <b>respository</b> or repo is a shared collection of files (usually code)
+            managed using Git. Git is a <b>version control system</b> (VCS), meaning it allows you to keep
+            multiple versions of your code. Our code is managed using Git, so you could look at all the versions of our code
+            starting from 2020. This is useful if we mess something up and need to roll back to a previous version. It's also
+            the standard way for controlled collaboration on code.</p>
+            <p>Publicly hosted repos have an associated URL. Github is a popular platform for hosting Git repos.
+            On Github, you can press "Code" to get the URL of the repo.
+            </p>
+            <p>If you want to use and contribute to our code, the first thing you need to do is <b>clone</b> our
+            repo. This is the first Git command you will learn.</p>
+            <p><code>git clone REPO_URL</code> (replace REPO_URL with the repo URL) - clones (downloads) the repo at REPO_URL
+            onto your disk. You can now edit the files in your copy. Don't worry, it won't change our code until you <b>push</b>.</p>
+            <p><a href = "https://github.com/MARS-UVA/mars-ros"><u>Our main repo</u></a></p></>,
+            starterCode: `#Clone the mars-ros repo on the MARS github
+$ BLANK`,
+            correctAnswers: ["git clone https://github.com/MARS-UVA/mars-ros.git"]
+        },
+
+        {
+            title: <>Staging and committing changes</>,
+            lesson: <><p>Now that the code is on your disk, you can change it the same way you usually edit files locally; you can
+                use an IDE like VSCode for code, a text editor like Notepad for most files, a photo editor for image files, etc.</p>
+                <p>After you're done editing the files, you need to "save" your changes in your copy of the repo (your <b>local repo</b>),
+                and this is done by making a <b>commit</b>, which is a local version of the code.
+                </p>
+                <p>First, you edit some files <code>fileA</code>, <code>fileB</code>, <code>fileC</code>. Then you need to stage those changes:</p>
+                <p><code>git add fileA fileB fileC</code> - stages the changes for committing. Some changes you want to keep off-record, so
+                only add the changes you want to be saved. Note that <code>fileA</code>, <code>fileB</code>, <code>fileC</code> are 
+                actually <b>file paths</b>, which are covered in the Linux levels.</p>
+                <p><code>git commit -m MESSAGE</code> - commits the changes, making a permanent record of how the files were.</p>
+                <p>Note: you are still working in your local repo, so nobody else can see these changes yet. That comes later.</p>
+                <p>MESSAGE is the <b>commit message</b>, and it's supposed to be something informative, explaining what 
+                    you did in this commit. "Fixed loading screen bug",
+                    "Drew cowboy hat on the character", "Made the home screen prettier" are pretty good commit messages. Remember,
+                    if someone discovers a bug, they will scroll down as deep as needed in the commit history to figure out where
+                    the bug started to find the cause. Make it clear what you changed and what you might have broken.
+                </p>
+                </>,
+            starterCode: `#You just got the Lidar to correctly output readings! Share these great findings with the rest of the team.
+#The file you changed is read_lidar.py, and you wanna attach the readings as proof as well. They're in a file called lidar_readings.log
+#For the commit message, say "fixed lidar output issue"
+$ BLANK
+$ BLANK`,
+            correctAnswers: ["git add read_lidar.py lidar_readings.log", "git commit -m \"fixed lidar output issue\""]
+        },
+
+        {
+            title: <>Remote repository</>,
+            lesson: <><p>You can interact with the <b>remote repo</b> (the shared repo) in two 
+            ways: <code>git push</code> and <code>git pull</code> (no arguments). When you push, you are uploading your
+            changes to the remote repo. When you pull, you sync your local repo up to date with the remote repo,
+            downloading all the commits your teammates have pushed.</p>
+            <p>What if you push an old version? It will mess up the code already in the remote repo. You should always make sure
+                your <b>working copy</b> (local repo) is synced with the remote repo before committing (except the new changes you're
+                trying to push!).</p>
+                <p>After pushing, everyone in the club will see your updated version when they open the repo. You'll have made a 
+                    lasting impact.</p></>,
+            starterCode: `#You're working on a repo with your friend. He says he just pushed a file called list.txt that he wants you to edit.
+#The commit message should be "added to the list"
+#What do you do so that he's able to see your edits?
+$ BLANK
+# (edited the list)
+$ BLANK
+$ BLANK
+$ BLANK
+`,
+            correctAnswers: ["git pull", "git add list.txt", "git commit -m 'added to the list'", "git push"]
+        },
+
+        {
+            title:<>In case of emergency</>,
+            lesson : <><p>Detached HEAD exception, deleting all the code on accident, lots of scary errors.
+                Sometimes things just go really wrong. To go back to the last commit, use <code className="bg-transparent">git reset --hard</code>.</p></>,
             starterCode : "#Oh no! You accidentally messed up the codebase. What do you do? \nBLANK",
             correctAnswers : ["git reset --hard"]
-        }, 
-        {
-            lesson:<p>dummy</p>,
-            title : <>dummy</>,
-            starterCode : "#dummy BLANK",
-            correctAnswers : ["dummy"]
         },
+
+        // {
+        //     lesson:<p>dummy</p>,
+        //     title : <>dummy</>,
+        //     starterCode : "#dummy BLANK",
+        //     correctAnswers : ["dummy"]
+        // },
     ],
     "linux" : [
         {
@@ -117,6 +190,7 @@ $ BLANK
                 <p>Here are some commands you will probably use the first time you enter a Linux environment:</p>
                 <li><code>ls</code> (list) - lists the files and directories in your working directory</li>
                 <li><code>locate FILENAME</code> - finds files that match the name and prints the paths </li>
+                <li><code>apt install PACKAGE_NAME</code> - installs packages you're missing, like python</li>
                 <p>Man pages below:</p>
                 <li><a target = "_blank" href="https://man7.org/linux/man-pages/man1/ls.1.html"><u>ls man page</u></a></li>
                 <li><a target = "_blank" href = "https://www.man7.org/linux/man-pages/man1/locate.1.html"><u>locate man page</u></a></li>
@@ -145,17 +219,34 @@ $ BLANK
                 separated by spaces)</li>
                 <li><code>touch FILENAME...</code> - creates a new file called FILENAME (and other things too, check out the man page!)</li>
                 <li><code>rm FILE...</code> (remove) - removes the file called FILE, can also remove directories</li>
-                <li><code>mv</code> (move) - </li>
+                <li><code>mv SOURCE... DESTINATION</code> (move) - moves SOURCE file to DESTINATION directory</li>
+                <li><code>cp SOURCE... DESTINATION</code> (copy) - make a copy of the SOURCE file and put it in DESTINATION</li>
+                <li><code>nano FILENAME</code> - opens a text editor to edit the file</li>
+                <li><code>cat FILENAME</code> - quickly see the contents of a file</li>
                 <p>Man pages:</p>
                 <li><a target = "_blank" href = "https://man7.org/linux/man-pages/man1/mkdir.1.html"><u>mkdir</u></a></li>
                 <li><a target="_blank" href = "https://man7.org/linux/man-pages/man1/touch.1.html"><u>touch</u></a></li>
-                <li><a target = "_blank" href = "https://man7.org/linux/man-pages/man1/rm.1.html"></a>rm</li>
+                <li><a target = "_blank" href = "https://man7.org/linux/man-pages/man1/rm.1.html"><u>rm</u></a></li>
+                <li><a target = "_blank" href = "https://linux.die.net/man/1/mv"><u>mv</u></a></li>
                 </>),
             
             starterCode: 
-`$ BLANK
+`#Make a directory called code.
+$ BLANK
+#Go into that directory and make a file called file1
+$ BLANK
+$ BLANK
+#Gah! I don't wanna code! Exit that directory, make a new one called fun, and copy the file there.
+$ BLANK
+$ BLANK
+$ BLANK
+#Let's change the name of the file to something fun, like drawing.
+$ BLANK
+#And delete that old directory. I don't even wanna think about coding.
+$ BLANK
 `,
-            correctAnswers: ['echo "Hello, MARS!"']
+            correctAnswers: ['mkdir code', 'cd code', 'touch file1', 'cd ..', 
+                'mkdir fun', 'mv code/file1 fun', 'cp fun/file1 fun/drawing', 'rm -r code']
         },
         {
             lesson: 
