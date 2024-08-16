@@ -6,12 +6,16 @@ import type { Session, User } from "lucia";
 import { redirect } from "next/navigation";
 import { db } from "./db";
 import { cookies } from "next/headers";
+import { NeonHTTPAdapter } from "@lucia-auth/adapter-postgresql";
 
-
-const adapter = new BetterSqlite3Adapter(db, {
+const adapter = new NeonHTTPAdapter(db, {
 	user: "Users",
 	session: "session"
 });
+// const adapter = new BetterSqlite3Adapter(db, {
+// 	user: "Users",
+// 	session: "session"
+// });
 
 export const lucia = new Lucia(adapter, {
 	sessionCookie: {
@@ -30,17 +34,17 @@ export const lucia = new Lucia(adapter, {
 });
 
 export async function dog(id : string, category : string) {
-	return db.prepare("SELECT questionIndex FROM solves WHERE userId = ? AND category = ?").all(id, category);
+	return await db("SELECT questionIndex FROM solves WHERE userId = $1 AND category = $2", [id, category]);
 }
 
 export async function getSolvedQuestions(id : string, category : string) {
 	'use server'
-	return db.prepare("SELECT questionIndex FROM solves WHERE userId = ? AND category = ?").all(id, category);
+	return await db("SELECT questionIndex FROM solves WHERE userId = $1 AND category = $2", [id, category]);
 }
 
 export async function solveQuestion(userId : string, questionIndex: number, category : string) {
 	'use server'
-	db.prepare("INSERT INTO solves (userId, questionIndex, category) VALUES (?, ?, ?)").run(userId, questionIndex, category);
+	db("INSERT INTO solves (userId, questionIndex, category) VALUES ($1, $2, $3)", [userId, questionIndex, category]);
 }
 
 export async function getCurrentUser() {
