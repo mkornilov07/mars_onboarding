@@ -13,7 +13,7 @@ export async function GET(request: Request): Promise<Response> {
 	const storedState = cookies().get("google_oauth_state")?.value ?? null;
 	if (!code || !state || !storedState || !storedCodeVerifier || state !== storedState) {
 		return new Response(null, {
-			status: 400, 
+			status: 401, 
 			statusText: "first",
 		});
 	}
@@ -79,7 +79,8 @@ export async function GET(request: Request): Promise<Response> {
 		if (e instanceof OAuth2RequestError) {
 			// invalid code
 			return new Response(null, {
-				status: 400,
+				status: 402,
+				statusText: "invalid code",
 				headers: {msg: 'invalid code'},
 			});
 		}
