@@ -79,14 +79,14 @@ export default function Question({submitFunc, starterCode, language, questionId,
 	
 	let responses : string[]= [];
 	for (let i = 0; i < blankCount; i++) {
-		let box = document.getElementById(`blank${i}`);
+		let box = document.getElementById(`blank${i}`) as HTMLInputElement;
 		let response = box?.value;
 		responses.push(response)}
 		checkAnswers(responses, category, questionId).then((compareArray) => {
 	// console.log("compareArray:")
 	console.log(`compareArray ${compareArray} : ${typeof compareArray[0]} : ${JSON.stringify(compareArray[0])}`)
     for (let i = 0; i < blankCount; i++) {
-      let box = document.getElementById(`blank${i}`);
+      let box = document.getElementById(`blank${i}`) as HTMLInputElement;
       let response = box?.value;
       // console.log(`You answered ${response}`);
       // console.log(`Correct answer is ${correctAnswers[i]}`)
@@ -105,7 +105,7 @@ export default function Question({submitFunc, starterCode, language, questionId,
     if(allCorrect) {
       // fireworks({sounds:false});
       setQuestionComplete(true);
-	  const fireworks = new Fireworks(document.getElementById("q"), {explosion: 6, particles:120, friction: 0.98 });
+	  const fireworks = new Fireworks(document.getElementById("q") as Element, {explosion: 6, particles:120, friction: 0.98 });
 		fireworks.launch(8)
     }
 		})
