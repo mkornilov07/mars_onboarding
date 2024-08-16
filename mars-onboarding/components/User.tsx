@@ -8,11 +8,12 @@ export default function User({logout, validateReq} : {logout: any, validateReq: 
 	useEffect(()=>{
 		async function a() {
 			const user = await validateReq();
-			if(user) setPicture(user.picture)
+			if(user) {setPicture(user.picture) 
+				console.log(user.picture)
+			}
 		}
 		a()
 	},[])
-    
 	if(picture == "") {
 		return (
 			// <div className="flex justify-center content-center p-4">

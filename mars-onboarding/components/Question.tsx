@@ -325,7 +325,7 @@ const pythonGrammar = {
 				pattern: /((?:^|[^<])<<-?\s*)(\w+)\s[\s\S]*?(?:\r?\n|\r)\2/,
 				lookbehind: true,
 				greedy: true,
-				inside: insideString
+				// inside: insideString //COMMENTED OUT
 			},
 			// Here-document with quotes around the tag
 			// → No expansion (so no “inside”).
@@ -334,7 +334,7 @@ const pythonGrammar = {
 				lookbehind: true,
 				greedy: true,
 				inside: {
-					'bash': commandAfterHeredoc
+					// 'bash': commandAfterHeredoc //Commented out
 				}
 			},
 			// “Normal” string
@@ -343,7 +343,7 @@ const pythonGrammar = {
 				pattern: /(^|[^\\](?:\\\\)*)"(?:\\[\s\S]|\$\([^)]+\)|\$(?!\()|`[^`]+`|[^"\\`$])*"/,
 				lookbehind: true,
 				greedy: true,
-				inside: insideString
+				// inside: insideString //commented out
 			},
 			{
 				// https://www.gnu.org/software/bash/manual/html_node/Single-Quotes.html
@@ -405,7 +405,7 @@ const pythonGrammar = {
 		}
 	};
 
-	commandAfterHeredoc.inside = Prism.languages.bash;
+	// commandAfterHeredoc.inside = Prism.languages.bash; //commented out
 
 	/* Patterns in command substitution. */
 	var toBeCopied = [
@@ -425,10 +425,10 @@ const pythonGrammar = {
 		'punctuation',
 		'number'
 	];
-	var inside = insideString.variable[1].inside;
-	for (var i = 0; i < toBeCopied.length; i++) {
-		inside[toBeCopied[i]] = Prism.languages.bash[toBeCopied[i]];
-	}
+	// var inside = insideString.variable[1].inside;
+	// for (var i = 0; i < toBeCopied.length; i++) {
+	// 	inside[toBeCopied[i]] = Prism.languages.bash[toBeCopied[i]];
+	// } // Commented out
 
 	Prism.languages.sh = Prism.languages.bash;
 	Prism.languages.shell = Prism.languages.bash;
@@ -442,29 +442,29 @@ const pythonGrammar = {
 			lookbehind: true,
 			greedy: true
 		},
-		'string-interpolation': {
-			pattern: /(?:f|fr|rf)(?:("""|''')[\s\S]*?\1|("|')(?:\\.|(?!\2)[^\\\r\n])*\2)/i,
-			greedy: true,
-			inside: {
-				'interpolation': {
-					// "{" <expression> <optional "!s", "!r", or "!a"> <optional ":" format specifier> "}"
-					pattern: /((?:^|[^{])(?:\{\{)*)\{(?!\{)(?:[^{}]|\{(?!\{)(?:[^{}]|\{(?!\{)(?:[^{}])+\})+\})+\}/,
-					lookbehind: true,
-					inside: {
-						'format-spec': {
-							pattern: /(:)[^:(){}]+(?=\}$)/,
-							lookbehind: true
-						},
-						'conversion-option': {
-							pattern: /![sra](?=[:}]$)/,
-							alias: 'punctuation'
-						},
-						rest: null
-					}
-				},
-				'string': /[\s\S]+/
-			}
-		},
+		// 'string-interpolation': {
+		// 	pattern: /(?:f|fr|rf)(?:("""|''')[\s\S]*?\1|("|')(?:\\.|(?!\2)[^\\\r\n])*\2)/i,
+		// 	greedy: true,
+		// 	inside: {
+		// 		'interpolation': {
+		// 			// "{" <expression> <optional "!s", "!r", or "!a"> <optional ":" format specifier> "}"
+		// 			pattern: /((?:^|[^{])(?:\{\{)*)\{(?!\{)(?:[^{}]|\{(?!\{)(?:[^{}]|\{(?!\{)(?:[^{}])+\})+\})+\}/,
+		// 			lookbehind: true,
+		// 			inside: {
+		// 				'format-spec': {
+		// 					pattern: /(:)[^:(){}]+(?=\}$)/,
+		// 					lookbehind: true
+		// 				},
+		// 				'conversion-option': {
+		// 					pattern: /![sra](?=[:}]$)/,
+		// 					alias: 'punctuation'
+		// 				},
+		// 				rest: null
+		// 			}
+		// 		},
+		// 		'string': /[\s\S]+/
+		// 	}
+		// }, Commented out
 		'triple-quoted-string': {
 			pattern: /(?:[rub]|br|rb)?("""|''')[\s\S]*?\1/i,
 			greedy: true,
@@ -498,7 +498,7 @@ const pythonGrammar = {
 		'punctuation': /[{}[\];(),.:]/
 	};
 	
-	Prism.languages.python['string-interpolation'].inside['interpolation'].inside.rest = Prism.languages.python;
+	// Prism.languages.python['string-interpolation'].inside['interpolation'].inside.rest = Prism.languages.python; //commented out
 	
 	Prism.languages.py = Prism.languages.python;
 	
