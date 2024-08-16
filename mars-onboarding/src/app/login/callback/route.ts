@@ -4,8 +4,10 @@ import { cookies } from "next/headers";
 import { OAuth2RequestError } from "arctic";
 import { generateIdFromEntropySize } from "lucia";
 import { SqliteError } from "better-sqlite3";
+import { NeonDbError } from "@neondatabase/serverless";
 
 export async function GET(request: Request): Promise<Response> {
+	return new Response(null, {status: 467, statusText: "Aaaaaa"})
 	const url = new URL(request.url);
 	const code = url.searchParams.get("code");
 	const state = url.searchParams.get("state");
@@ -56,7 +58,7 @@ export async function GET(request: Request): Promise<Response> {
 			db("INSERT INTO Users ( id, picture ) VALUES ($1, $2)", [googleUser.sub, googleUser.picture]);
 		}
 		catch(e : any) {
-			if(e instanceof SqliteError) {}
+			if(e instanceof NeonDbError) {}
 			else return new Response(null, {
 				status: 598, 
 				statusText: e,
