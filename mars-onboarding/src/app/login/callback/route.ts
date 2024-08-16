@@ -82,7 +82,7 @@ export async function GET(request: Request): Promise<Response> {
 			return new Response(null, {
 				status: 402,
 				statusText: "invalid code",
-				headers: {msg: 'invalid code'},
+				headers: {msg: e.message},
 			});
 		}
 
