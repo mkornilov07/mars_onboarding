@@ -7,7 +7,7 @@ export async function GET(): Promise<Response> {
 	const state = generateState();
     const codeVerifier = generateCodeVerifier();
 
-	const url = await google.createAuthorizationURL(state, codeVerifier);
+	try {const url = await google.createAuthorizationURL(state, codeVerifier);
 
 	cookies().set("google_oauth_state", state, {
 		path: "/",
@@ -24,6 +24,10 @@ export async function GET(): Promise<Response> {
 		maxAge: 60 * 10,
 		sameSite: "lax"
 	});
-
-	return Response.redirect(url);
+	return Response.redirect(url)
+}
+	catch(e) {
+		return new Response(e as any, {status:403})
+	}
+	;
 }

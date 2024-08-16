@@ -15,7 +15,7 @@ export async function GET(request: Request): Promise<Response> {
 		return new Response(null, {
 			status: 401, 
 			statusText: "first",
-			headers: {"code_verifier": storedCodeVerifier??'null', "stored_state":storedState??"null"}
+			headers: {"stored_code_verifier": storedCodeVerifier??'null', "stored_state":storedState??"null"}
 		});
 	}
 
