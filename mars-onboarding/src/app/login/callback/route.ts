@@ -89,7 +89,8 @@ export async function GET(request: Request): Promise<Response> {
 			});
 		}
 		console.log(JSON.stringify(e) +" google user: "+ JSON.stringify(googleUser))
-		return new Response(JSON.stringify(e) +" google user: "+ JSON.stringify(googleUser) + " sub " + googleUser.sub, {
+		return new Response(JSON.stringify(e) +" google user: "+ JSON.stringify(googleUser) + " sub " + googleUser.sub
+		+ "found user " + JSON.stringify(await db("SELECT id FROM users WHERE id = $1", [googleUser.sub])), {
 			status: 505,
 			statusText: e, headers: {msg: e}
 		});
