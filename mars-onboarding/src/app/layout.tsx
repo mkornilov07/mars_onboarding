@@ -7,7 +7,7 @@ const roboto = Roboto({ subsets: ["latin"], weight: ["300"] });
 
 export const metadata: Metadata = {
   title: "Mars Onboarding",
-  description: "ill let the stone write this one",
+  description: "Begin your journey at UVA's most innovative organization",
   icons: {
     icon: "/icons/mars_onboarding_icon.png",
   },
