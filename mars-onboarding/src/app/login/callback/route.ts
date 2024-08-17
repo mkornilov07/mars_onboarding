@@ -67,6 +67,8 @@ export async function GET(request: Request): Promise<Response> {
 			});
 		}
 		const session = await lucia.createSession(googleUser.sub, {});
+		console.log("google user")
+		console.log(googleUser)
 		const sessionCookie = lucia.createSessionCookie(session.id);
 		cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
 		return new Response(null, {
@@ -85,10 +87,10 @@ export async function GET(request: Request): Promise<Response> {
 				headers: {msg: e.message},
 			});
 		}
-		console.log(e)
-		return new Response(e, {
+		console.log(JSON.stringify(e))
+		return new Response(JSON.stringify(e) + googleUser., {
 			status: 505,
-			statusText: e, headers: {msg: e + process.env.POSTGRES_URL + process.env.POSTGRES_DATABASE}
+			statusText: e, headers: {msg: e}
 		});
 	}
 }

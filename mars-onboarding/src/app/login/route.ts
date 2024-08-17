@@ -3,7 +3,7 @@ import { google } from "@/lib/lucia";
 import { cookies } from "next/headers";
 
 export async function GET(): Promise<Response> {
-
+	
 	const state = generateState();
     const codeVerifier = generateCodeVerifier();
 	// return new Response(null, {status:410, statusText: process.env.PORT, headers: {msg: process.env.PORT??"no port variable"}})
