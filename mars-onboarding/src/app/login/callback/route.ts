@@ -67,7 +67,7 @@ export async function GET(request: Request): Promise<Response> {
 				}
 			});
 		}
-		const session = await lucia.createSession(googleUser.sub, {});
+		const session = await lucia.createSession(googleUser.sub??"5", {});
 		console.log("google user")
 		console.log(googleUser)
 		const sessionCookie = lucia.createSessionCookie(session.id);
