@@ -92,7 +92,7 @@ interface DatabaseUserAttributes {
 
 export const google = new Google(
 	process.env.GOOGLE_CLIENT_ID!, process.env.GOOGLE_CLIENT_SECRET!,
-	process.env.DEPLOYMENT_URL+"/login/callback/"
+	process.env.DEPLOYMENT_URL+"/login/callback"
 );
 
 export async function logout(redirectAddress : string): Promise<ActionResult | void> {
