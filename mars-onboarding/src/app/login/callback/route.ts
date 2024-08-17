@@ -58,7 +58,7 @@ export async function GET(request: Request): Promise<Response> {
 			db("INSERT INTO users ( id, picture ) VALUES ($1, $2)", [googleUser.sub, googleUser.picture]);
 		}
 		catch(e : any) {
-			if(e instanceof NeonDbError) {}
+			if(e instanceof NeonDbError) {return new Response(JSON.stringify(e), {status: 511})}
 			else return new Response(null, {
 				status: 598, 
 				statusText: e,
