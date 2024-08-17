@@ -85,7 +85,7 @@ export async function GET(request: Request): Promise<Response> {
 				headers: {msg: e.message},
 			});
 		}
-
+		console.log(e)
 		return new Response(e, {
 			status: 505,
 			statusText: e, headers: {msg: e}
