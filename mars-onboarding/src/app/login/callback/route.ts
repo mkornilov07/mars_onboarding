@@ -23,7 +23,8 @@ export async function GET(request: Request): Promise<Response> {
 		const googleUserResponse = await fetch("https://openidconnect.googleapis.com/v1/userinfo", {
 			headers: {
 				Authorization: `Bearer ${tokens.accessToken}`,
-				scope: "openid email profile"
+				scope: "openid email profile",
+				"Access-Control-Allow-Origin": "*"
 			}
 		});
 		const googleUser: GoogleUser = await googleUserResponse.json();
@@ -87,7 +88,7 @@ export async function GET(request: Request): Promise<Response> {
 				headers: {msg: e.message},
 			});
 		}
-		console.log(JSON.stringify(e) + JSON.stringify(googleUser))
+		console.log(JSON.stringify(e) +" google user: "+ JSON.stringify(googleUser))
 		return new Response(JSON.stringify(e), {
 			status: 505,
 			statusText: e, headers: {msg: e}
