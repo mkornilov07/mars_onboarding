@@ -13,7 +13,9 @@ export default function LevelSelector({titles, solvedQuestions, setLevelIndex, s
     useEffect(()=>{setSolvedQuestionsState(solvedQuestions)}, [solvedQuestions]);
     useEffect(()=>{
         async function a() {
-            setSolvedQuestionsState(await fetchSolvedQuestions(section));
+            const fetchedQuestions = await fetchSolvedQuestions(section)
+            console.log(`fetched questions: ${fetchedQuestions}`)
+            setSolvedQuestionsState(fetchedQuestions);
         }
         if(submitted) {
             a();

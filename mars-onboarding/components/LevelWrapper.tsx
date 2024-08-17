@@ -3,6 +3,7 @@ import Level, { allQuestionData, questionData } from "./Level";
 import { validateRequest, getSolvedQuestions, solveQuestion, getCurrentUser, logout} from "@/lib/lucia";
 import { cache, use } from "react";
 export const fetchSolvedQuestions = cache(async (section : string) => {
+    "use server"
     let solvedQuestions;
     let user = await getCurrentUser();
     if (user == null) solvedQuestions = [];
