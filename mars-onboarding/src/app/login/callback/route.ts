@@ -37,7 +37,7 @@ export async function GET(request: Request): Promise<Response> {
 		// 	}
 		// });
 
-		const existingUser : any = await db("SELECT id FROM Users WHERE id = $1", [googleUser.sub]);
+		const existingUser : any = await db("SELECT id FROM users WHERE id = $1", [googleUser.sub]);
 		
 		if (existingUser) { // new Response.redirect([level url])
 			const session = await lucia.createSession(existingUser.id, {});
@@ -54,7 +54,7 @@ export async function GET(request: Request): Promise<Response> {
 		// below only runs when new user
 		// const userId : string = generateIdFromEntropySize(10); // 16 characters long
 		try {
-			db("INSERT INTO Users ( id, picture ) VALUES ($1, $2)", [googleUser.sub, googleUser.picture]);
+			db("INSERT INTO users ( id, picture ) VALUES ($1, $2)", [googleUser.sub, googleUser.picture]);
 		}
 		catch(e : any) {
 			if(e instanceof NeonDbError) {}

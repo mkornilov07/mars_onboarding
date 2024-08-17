@@ -9,7 +9,7 @@ import { cookies } from "next/headers";
 import { NeonHTTPAdapter } from "@lucia-auth/adapter-postgresql";
 
 const adapter = new NeonHTTPAdapter(db, {
-	user: "Users",
+	user: "users",
 	session: "session"
 });
 // const adapter = new BetterSqlite3Adapter(db, {

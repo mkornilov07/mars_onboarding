@@ -3,7 +3,7 @@ import { neon } from "@neondatabase/serverless";
 
 export const db = neon(process.env.POSTGRES_URL??"")//'ep-bitter-frog-a4jtafac-pooler.us-east-1.aws.neon.tech');
 
-db("CREATE TABLE IF NOT EXISTS Users(id TEXT NOT NULL PRIMARY KEY, picture TEXT)");
+db("CREATE TABLE IF NOT EXISTS users(id TEXT NOT NULL PRIMARY KEY, picture TEXT)");
 db(`CREATE TABLE IF NOT EXISTS session (
     id TEXT PRIMARY KEY,
     expires_at TIMESTAMPTZ NOT NULL,
