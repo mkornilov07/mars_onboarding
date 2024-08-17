@@ -87,7 +87,7 @@ export async function GET(request: Request): Promise<Response> {
 		}
 
 		return new Response(null, {
-			status: 500,
+			status: 505,
 			statusText: e
 		});
 	}
