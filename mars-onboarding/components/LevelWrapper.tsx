@@ -7,7 +7,7 @@ export const fetchSolvedQuestions = cache(async (section : string) => {
     let solvedQuestions;
     let user = await getCurrentUser();
     if (user == null) solvedQuestions = [];
-    else solvedQuestions = (await getSolvedQuestions(user.id, section) as any[]).map(e => e.questionIndex)
+    else solvedQuestions = (await getSolvedQuestions(user.id, section) as any[])//.map(e => e.questionIndex)
     return solvedQuestions
 })
 
