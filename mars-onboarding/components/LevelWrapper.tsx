@@ -4,10 +4,10 @@ import { validateRequest, getSolvedQuestions, solveQuestion, getCurrentUser, log
 import { cache, use } from "react";
 export const fetchSolvedQuestions = cache(async (section : string) => {
     "use server"
-    let solvedQuestions;
+    let solvedQuestions : string[];
     let user = await getCurrentUser();
     if (user == null) solvedQuestions = [];
-    else solvedQuestions = (await getSolvedQuestions(user.id, section) as any[])//.map(e => e.questionIndex)
+    else solvedQuestions = (await getSolvedQuestions(user.id, section) as object[]).map(e=>JSON.stringify(e))
     return solvedQuestions
 })
 
