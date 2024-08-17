@@ -55,7 +55,7 @@ export async function GET(request: Request): Promise<Response> {
 		// below only runs when new user
 		// const userId : string = generateIdFromEntropySize(10); // 16 characters long
 		try {
-			db("INSERT INTO users ( id, picture ) VALUES ($1, $2)", [googleUser.sub, googleUser.picture]);
+			await db("INSERT INTO users ( id, picture ) VALUES ($1, $2)", [googleUser.sub, googleUser.picture]);
 		}
 		catch(e : any) {
 			if(e instanceof NeonDbError) {return new Response(JSON.stringify(e), {status: 511})}
