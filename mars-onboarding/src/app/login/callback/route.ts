@@ -18,9 +18,7 @@ export async function GET(request: Request): Promise<Response> {
 			headers: {"stored_code_verifier": storedCodeVerifier??'null', "stored_state":storedState??"null"}
 		});
 	}
-
-	try {
-		const tokens = await google.validateAuthorizationCode(code, storedCodeVerifier);
+	const tokens = await google.validateAuthorizationCode(code, storedCodeVerifier);
 
 		const googleUserResponse = await fetch("https://openidconnect.googleapis.com/v1/userinfo", {
 			headers: {
@@ -29,6 +27,8 @@ export async function GET(request: Request): Promise<Response> {
 			}
 		});
 		const googleUser: GoogleUser = await googleUserResponse.json();
+	try {
+		
 		// return new Response(null, {
 		// 	status: 200,
 		// 	statusText: "Validated user",
@@ -87,7 +87,7 @@ export async function GET(request: Request): Promise<Response> {
 				headers: {msg: e.message},
 			});
 		}
-		console.log(JSON.stringify(e))
+		console.log(JSON.stringify(e) + JSON.stringify(googleUser))
 		return new Response(JSON.stringify(e), {
 			status: 505,
 			statusText: e, headers: {msg: e}
