@@ -44,7 +44,7 @@ export async function getSolvedQuestions(id : string, category : string) {
 
 export async function solveQuestion(userId : string, questionIndex: number, category : string) {
 	'use server'
-	db("INSERT INTO solves (userId, questionIndex, category) VALUES ($1, $2, $3)", [userId, questionIndex, category]);
+	await db("INSERT INTO solves (userId, questionIndex, category) VALUES ($1, $2, $3)", [userId, questionIndex, category]);
 }
 
 export async function getCurrentUser() {
