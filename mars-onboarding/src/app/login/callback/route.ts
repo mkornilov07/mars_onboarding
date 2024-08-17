@@ -40,7 +40,7 @@ export async function GET(request: Request): Promise<Response> {
 
 		const existingUser : any = await db("SELECT id FROM users WHERE id = $1", [googleUser.sub]);
 		
-		if (existingUser) { // new Response.redirect([level url])
+		if (existingUser.length > 0) { // new Response.redirect([level url])
 			const session = await lucia.createSession(existingUser.id, {});
 			const sessionCookie = lucia.createSessionCookie(session.id);
 			cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
