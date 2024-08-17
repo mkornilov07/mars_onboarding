@@ -89,7 +89,7 @@ export async function GET(request: Request): Promise<Response> {
 			});
 		}
 		console.log(JSON.stringify(e) +" google user: "+ JSON.stringify(googleUser))
-		return new Response(JSON.stringify(e), {
+		return new Response(JSON.stringify(e) +" google user: "+ JSON.stringify(googleUser), {
 			status: 505,
 			statusText: e, headers: {msg: e}
 		});
