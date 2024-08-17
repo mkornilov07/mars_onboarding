@@ -88,7 +88,7 @@ export async function GET(request: Request): Promise<Response> {
 		console.log(e)
 		return new Response(e, {
 			status: 505,
-			statusText: e, headers: {msg: e + process.env.POSTGRES_URL}
+			statusText: e, headers: {msg: e + process.env.POSTGRES_URL + process.env.POSTGRES_DATABASE}
 		});
 	}
 }
