@@ -6,7 +6,7 @@ export async function GET(): Promise<Response> {
 
 	const state = generateState();
     const codeVerifier = generateCodeVerifier();
-	return new Response(null, {status:410, statusText: process.env.PORT, headers: {msg: process.env.PORT??"no port variable"}})
+	// return new Response(null, {status:410, statusText: process.env.PORT, headers: {msg: process.env.PORT??"no port variable"}})
 	try {const url = await google.createAuthorizationURL(state, codeVerifier);
 
 	cookies().set("google_oauth_state", state, {
