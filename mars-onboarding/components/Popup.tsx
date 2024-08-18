@@ -35,7 +35,9 @@ export default function Popup({contents, title} : {contents: React.JSX.Element, 
         <ModalContent>
             {(onClose) => (
             <>
-            <div className = "animate__animated animate__lightSpeedInRight scale-75 transform right-1 fixed pointer-events-none"><img src = "/icons/rover.png"></img></div>
+                <div className = "flex animate__animated animate__lightSpeedInRight transition-all w-0 h-0 sm:w-1/4 sm:h-1/4 sm:transition md:w-1/3 md:h-1/3 md:transition lg:w-1/2 lg:h-1/2 lg:transition xl:w-3/5 xl:h-3/5 lg:transition transform right-1 bottom-1 fixed pointer-events-none place-content-end">
+                    <img src = "/icons/rover.png"></img>
+                </div>
                 <ModalHeader className="flex flex-col gap-1">{title}</ModalHeader>
                 <ModalBody>{contents}
                 </ModalBody>
