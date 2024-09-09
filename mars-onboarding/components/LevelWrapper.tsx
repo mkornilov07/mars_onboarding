@@ -245,7 +245,7 @@ $ BLANK
 $ BLANK
 `,
             correctAnswers: ['mkdir code', 'cd code', 'touch file1', 'cd ..', 
-                'mkdir fun', 'mv code/file1 fun', 'cp fun/file1 fun/drawing', 'rm -r code']
+                'mkdir fun', 'cp code/file1 fun', 'mv fun/file1 fun/drawing', 'rm -r code']
         },
         {
             lesson: 

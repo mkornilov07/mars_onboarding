@@ -128,6 +128,8 @@ export default function Question({submitFunc, starterCode, language, questionId,
 		 : <button className ="bg-red-800 active:shadow-[0_0_5px_#666] opacity-80 cursor-pointer border-red-600 hover:shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#08f,0_0_15px_#08f,0_0_30px_#08f] hover:shadow-red-600 hover:bg-red-800 hover:opacity-80 text-white font-bold py-2 px-4 rounded" onClick = {onSubmit}>
           Submit
         </button> }
+		<br></br>
+		<Link style={{color:"darkblue", fontSize:12}} target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSeAFMwVDVuot8mknaxU9sOCcfjbVdC9JgmDUjz9NMRNkhQelA/viewform?usp=sharing"><u>Submit Feedback</u></Link>
 		<div><canvas id = "q" className="pointer-events-none relative w-[900px] h-[1000px] -top-[400px]"></canvas></div>
       </div>)
     )
