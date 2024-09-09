@@ -29,13 +29,13 @@ data: allQuestionData, section : string, suffix : string, language : string, sol
     return (
         <>
            <div className = "px-16 justify-between content-center h-32 flex opacity-90 shadow-md shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#08f,0_0_15px_#08f] shadow-black text-white bg-black top w-full h-30">
-                {/* <Link href = "/level/" className = "text-white opacity-60 hover:opacity-100 m-0 self-center content-start select-none text-5xl hover:text-red-700">⬅</Link>
+                <Link href = "/level/" className = "text-white opacity-60 hover:opacity-100 m-0 self-center content-start select-none text-5xl hover:text-red-700">⬅</Link>
                 <span className = "m-6 w-2/3 self-center inline-flex content-center gap-2 justify-center">
                     <Popup contents = {data[section][levelIndex].lesson} title = {data[section][levelIndex].title}></Popup>
                     <LevelSelector solvedQuestions = {solvedQuestions} section = {section} titles = {titles} setLevelIndex={setLevelIndex} setSubmit = {setSubmit} submitted = {submitted} questionId = {levelIndex} suffix = {suffix}></LevelSelector>
                     
                 </span>
-                <User logout = {logout} validateReq={validateReq}/> */}
+                <User logout = {logout} validateReq={validateReq}/>
             </div>
             <div className = "z-0 flex-col select-none min-h-screen w-full bg-zinc-900 text-white">
                 
