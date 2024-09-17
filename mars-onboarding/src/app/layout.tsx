@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({children}: { children: React.ReactNode }){
-  return (<Analytics>
+  return (
     <html lang="en" className = "dark text-foreground bg-background select-none">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -23,8 +23,8 @@ export default function RootLayout({children}: { children: React.ReactNode }){
         <Providers>
           { children }
         </Providers>
+        <Analytics/>
       </body>
     </html>
-    </Analytics>
   );
 };
