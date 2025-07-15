@@ -1,7 +1,7 @@
 import { NeonHTTPAdapter } from "@lucia-auth/adapter-postgresql";
 import { neon } from "@neondatabase/serverless";
 
-export const db = neon(process.env.POSTGRES_URL)
+export const db = neon(process.env.POSTGRES_URL??"")
 
 db("CREATE TABLE IF NOT EXISTS users(id TEXT NOT NULL PRIMARY KEY, picture TEXT)");
 db(`CREATE TABLE IF NOT EXISTS session (
