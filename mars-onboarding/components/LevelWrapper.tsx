@@ -315,7 +315,7 @@ else
         
     ],
     "ros": [
-        {
+        /*{
             lesson: (<><p>A node that publishes messages in a topic is called a <b>publisher</b>.
                 A node that listens to a topic and performs actions based on what messages it receives is called a <b>subscriber</b>.</p>
                 <p>Refer to the documentation below:</p>
@@ -346,5 +346,57 @@ if __name__ == "__main__":
 `,
         title: <>Subscribers and Publishers</>,
         correctAnswers: ['pub.publish(String("yes"))', 'pub.publish(String("no"))', '"ir_readings", Int64, callback']
+    } ROS1 Q1 deprecated*/
+    { // ROS Q1
+            lesson: (<><p>A node that publishes messages in a topic is called a <b>publisher</b>.
+                A node that listens to a topic and performs actions based on what messages it receives is called a <b>subscriber</b>.</p>
+                <p>Refer to the documentation below:</p>
+                <li><a target = "_blank" href = "https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Py-Publisher-And-Subscriber.html#id1"><u>ROSPy - Subscriber</u></a></li>
+                <li><a target = "_blank" href = "https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Py-Publisher-And-Subscriber.html#write-the-publisher-node"><u>ROSPy - Publisher</u></a></li>
+                <li><a target="_blank" href = "https://docs.ros2.org/foxy/api/rclpy/api/node.html#rclpy.node.Node.create_subscription"><u>Node.create_subscription API</u></a></li>
+                <li><a target="_blank" href = "https://docs.ros2.org/foxy/api/rclpy/api/node.html#rclpy.node.Node.create_publisher"><u>Node.create_publisher API</u></a></li>
+                </>),
+            starterCode: `
+import rclpy
+from rclpy.node import Node
+
+from std_msgs.msg import Int32, String
+
+class DigStopper(Node):
+    """
+    Tells the motors to stop digging by publishing a 'Stop' message if the height of the collection bin exceeds (strictly larger than) 15 inches.
+    This node listens to bin_height_topic for an Int32 describing the bin height in inches.
+    The 'Stop' command is published in motor_command_height.
+    All topics are rated at 10 Hz.
+    """
+    def __init__(self):
+        super().__init__('dig_stopper')
+        self.motor_command_publisher = BLANK
+        self.bin_height_subscriber = BLANK
+
+    def check_bin_height(self, binHeightMsg):
+        if BLANK:
+            motorCommandMsg = String()
+            motorCommandMsg.data = BLANK
+            BLANK
+
+def main(args=None):
+    rclpy.init(args=args)
+
+    dig_stopper = DigStopper()
+    rclpy.spin(dig_stopper)
+
+    dig_stopper.destroy_node()
+    rclpy.shutdown()
+
+if __name__ == '__main__':
+    main()
+`,
+        title: <>Subscribers and Publishers</>,
+        correctAnswers: ["self.create_publisher(String, 'motor_command_topic', 10)",
+                        "self.create_subscription(Int32, 'bin_height_topic', self.check_bin_height, 10)",
+                        "binHeightMsg.data > 15",
+                        "'Stop'",
+                        "self.motor_command_publisher.publish(motorCommandMsg)"]
     },]
 }
