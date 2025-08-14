@@ -11,14 +11,14 @@ export const fetchSolvedQuestions = cache(async (section : string) => {
     return solvedQuestions
 })
 
-const interTokenSpace = /(?:(?<=[A-Za-z0-9_"']) *(?=[,+<>=\/:\[\](){}\-]))|(?:(?<=[,+<>=\/:\[\](){}\-]) *(?=[A-Za-z0-9_"']))/
+const interTokenSpace = /(?:(?<=[A-Za-z0-9_"']) *(?=[,+<>=\/:\[\](){}\-]))|(?:(?<=[,+<>=\/:\[\](){}\-]) *(?=[A-Za-z0-9_"']))/g
 const  compareAnswer = (answer: string, key : string) => {
     let answerTok = answer.replaceAll(interTokenSpace, " ")
     let keyTok = key.replaceAll(interTokenSpace, " ")
 
     let answerSingleQuoted = answerTok.replaceAll('"', "'")
     let keySingleQuoted = keyTok.replaceAll('"', "'")
-    
+
     let answerStripped = answerSingleQuoted.trim()
     let keyStripped = keySingleQuoted.trim()
     return answerStripped == keyStripped;
@@ -372,12 +372,12 @@ from rclpy.node import Node
 from std_msgs.msg import Int32, String
 
 class DigStopper(Node):
-    """
+    '''
     Tells the motors to stop digging by publishing a 'Stop' message if the height of the collection bin exceeds (strictly larger than) 15 inches.
     This node listens to bin_height_topic for an Int32 describing the bin height in inches.
     The 'Stop' command is published in motor_command_height.
     All topics are rated at 10 Hz.
-    """
+    '''
     def __init__(self):
         super().__init__('dig_stopper')
         self.motor_command_publisher = BLANK
