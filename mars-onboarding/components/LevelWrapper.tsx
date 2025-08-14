@@ -11,8 +11,17 @@ export const fetchSolvedQuestions = cache(async (section : string) => {
     return solvedQuestions
 })
 
-const  compareAnswer = (answer: string, key : string) => { // do more advanced logic in the future, regex and stuff
-    return answer.replaceAll(" ", "").replaceAll('"', "'") == key.replaceAll(" ", "").replaceAll('"', "'");
+const interTokenSpace = /(?:(?<=[A-Za-z0-9_"']) *(?=[,+<>=\/:\[\](){}\-]))|(?:(?<=[,+<>=\/:\[\](){}\-]) *(?=[A-Za-z0-9_"']))/
+const  compareAnswer = (answer: string, key : string) => {
+    let answerTok = answer.replaceAll(interTokenSpace, " ")
+    let keyTok = key.replaceAll(interTokenSpace, " ")
+
+    let answerSingleQuoted = answerTok.replaceAll('"', "'")
+    let keySingleQuoted = keyTok.replaceAll('"', "'")
+    
+    let answerStripped = answerSingleQuoted.trim()
+    let keyStripped = keySingleQuoted.trim()
+    return answerStripped == keyStripped;
 }
 
 export async function checkAnswers(answers: string[], section : string, questionIndex : number) {
