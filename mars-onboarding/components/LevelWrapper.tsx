@@ -425,5 +425,68 @@ def main(args=None):
                         "self.get_logger().info(f'Temp: {tempMsg.data}')",
 
         ]
-    },]
+    },
+
+    { // ROS Q3
+            lesson: (<><p>A <b>timer</b> allows your node to execute a function repeatedly over time.</p>
+            <p>A timer is similar to a subscription because the callback function is executed over and over, but it's different
+                because the function is executed at a set time interval, instead of waiting for a message in a topic.
+            </p>
+            <p> To create a timer, you use the node's <code>create_timer</code> function, very similarly to <code>create_subscription</code>.
+            </p>
+            <p>Refer to this documentation:</p>
+            <p><a target="_blank" href = "https://docs.ros2.org/foxy/api/rclpy/api/node.html#rclpy.node.Node.create_timer"><u>create_timer</u></a></p>
+                </>),
+            starterCode: `
+import rclpy
+from rclpy.node import Node
+
+from motor_controls import send_to_motor
+from std_msgs.msg import Int32, String
+
+class MotorSpeedManager(Node):
+    # Maintains motor speed and listens to external commands to set/increment speed
+    # Speed is represented as an Int32, as are commands
+    # Commands to set the speed are sent to the "set_speed" topic
+    # Commands to increment the speed are sent to the "increment_speed" topic
+    # Every 0.5 seconds, this node should send its speed to the motor
+    # Example: Speed is 5, we receive an increment message with a value of 7, now the speed is 12
+    # Each topic is rated at 10 Hz
+    def __init__(self):
+        super().__init__('motor_speed_manager')
+        self.set_speed_subscriber = BLANK
+        self.increment_speed_subscriber = BLANK
+        self.timer = BLANK
+        self.speed = 0
+
+    def handle_inc_speed(incSpeedMsg):
+        BLANK += BLANK
+
+    def handle_set_speed(setSpeedMsg):
+        BLANK
+
+    def send_speed(self):
+        # If the speed is above 100, log "Invalid speed: " followed by the speed, as an error
+        # Otherwise, send the speed to the motor
+        if BLANK:
+            BLANK
+            return
+        send_to_motor(BLANK)
+    
+def main(args=None):
+    ...
+`,
+        title: <>Timers</>,
+        correctAnswers: ['self.create_subscription(Int32, "set_speed", self.handle_set_speed, 10)',
+                        'self.create_subscription(Int32, "increment_speed", self.handle_inc_speed, 10)',
+                        'self.create_timer(0.5, self.send_speed)',
+                        'self.speed',
+                        'incSpeedMsg.data',
+                        'self.speed = setSpeedMsg.data',
+                        'self.speed > 100',
+                        'self.get_logger().error(f"Invalid speed: {self.speed}")',
+                        'self.speed'
+        ]
+    },
+    ]
 }
