@@ -442,7 +442,7 @@ import rclpy
 from rclpy.node import Node
 
 from motor_controls import send_to_motor
-from std_msgs.msg import Int32, String
+from std_msgs.msg import Int32
 
 class MotorSpeedManager(Node):
     # Maintains motor speed and listens to external commands to set/increment speed
