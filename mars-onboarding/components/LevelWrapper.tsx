@@ -340,12 +340,10 @@ from rclpy.node import Node
 from std_msgs.msg import Int32, String
 
 class DigStopper(Node):
-    '''
-    Tells the motors to stop digging by publishing a 'Stop' message if the height of the collection bin exceeds (strictly larger than) 15 inches.
-    This node listens to bin_height_topic for an Int32 describing the bin height in inches.
-    The 'Stop' command is published in motor_command_height.
-    All topics are rated at 10 Hz.
-    '''
+    # Tells the motors to stop digging by publishing a 'Stop' message if the height of the collection bin exceeds (strictly larger than) 15 inches.
+    # This node listens to bin_height_topic for an Int32 describing the bin height in inches.
+    # The 'Stop' command should be published in motor_command_topic.
+    # All topics are rated at 10 Hz.
     def __init__(self):
         super().__init__('dig_stopper')
         self.motor_command_publisher = BLANK
@@ -375,5 +373,57 @@ if __name__ == '__main__':
                         "binHeightMsg.data > 15",
                         "'Stop'",
                         "self.motor_command_publisher.publish(motorCommandMsg)"]
+    },
+
+    { // ROS Q2
+            lesson: (<><p>Logging is important for outputting meaningful messages with either information, warnings, or errors.</p>
+            <p>Each node comes with a <code>self.get_logger()</code> function that gives you the logger, which can be used to call the functions 
+            <code>info</code>, <code>warn</code>, <code>error</code>, which print messages of different severity levels.</p>
+            <p>For example, if the webcam can't be accessed, the webcam node might execute</p>
+            <p><code>self.get_logger().error("Cannot access webcam")</code></p>
+            <p>before exiting. In the console, this would output something like</p>
+            <p><code style={{"color":"red"}}>[ERROR][webcam_node][14:23:35.0122] Cannot access webcam</code></p>
+            <p>Python fstrings are especially useful for log messages, allowing you to quickly print variables and expressions without casting
+                 to strings. We just precede the string with an "f" and encase the expressions in braces. For example, if we want to print 
+                 the variable <code>time</code> and <code>time + 5</code>, 
+                 we'd execute 
+            </p>
+            <p><code>self.get_logger().info(f"The time is {'{time}'}. In 5 minutes, it will be {'{time+5}'}.")</code></p>
+                </>),
+            starterCode: `
+import rclpy
+from rclpy.node import Node
+
+from std_msgs.msg import Int32, String
+
+class AutonomyLogger(Node):
+    # Monitors key operations of the robot while in autonomous control
+    def __init__(self):
+        super().__init__('autonomy_logger')
+        self.motor_command_subscriber = self.create_subscription(String, "motor_commands", self.log_motor_command, 10)
+        self.temp_subscriber = self.create_subscription(Int32, "cpu_temperature", self.check_temperature, 10)
+
+    def log_motor_command(self, commandMsg):
+        # Log the command as info, "Got motor command: " followed by the command
+        BLANK
+    
+    def check_temperature(self, tempMsg):
+        # If the CPU temperature is above 90, log a warning saying "CPU overheating", followed by the temperature in parentheses.
+        # Otherwise, log "Temp: " followed by the temperature
+        if BLANK > 90:
+            BLANK
+        else:
+            BLANK
+    
+def main(args=None):
+    ...
+`,
+        title: <>Logging</>,
+        correctAnswers: ["self.get_logger().info(f'Got motor command: {commandMsg.data}')",
+                        "tempMsg.data",
+                        "self.get_logger().warn(f'CPU overheating ({tempMsg.data})')",
+                        "self.get_logger().info(f'Temp: {tempMsg.data}')",
+
+        ]
     },]
 }
